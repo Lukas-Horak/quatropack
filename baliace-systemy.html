@@ -35,7 +35,7 @@
     body {
       font-family: 'Inter', sans-serif;
       color: var(--text-primary);
-      background-color: var(--bg-white);
+      background-color: var(--bg-light);
       line-height: 1.6;
     }
 
@@ -220,36 +220,31 @@
     .btn-accent {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px 32px;
-      background-color: var(--accent);
-      color: var(--bg-dark);
+      gap: 12px;
+      background: var(--accent);
       border: none;
+      color: #000;
+      padding: 16px 28px;
       border-radius: 100px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      text-decoration: none;
-      transition: padding 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .btn-accent:hover {
-      padding-right: 38px;
-      box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
-    }
-
-    .btn-accent:hover .arrow {
-      transform: translateX(6px);
-    }
-
+    .btn-accent:hover { padding-right: 38px; box-shadow: 0 8px 24px rgba(212,255,0,0.3); }
     .btn-accent .arrow {
-      width: 18px;
-      height: 18px;
+      width: 32px;
+      height: 32px;
+      background: rgba(0,0,0,0.15);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.3s ease;
     }
+    .btn-accent:hover .arrow { transform: translateX(6px); }
+    .btn-accent .arrow svg { width: 16px; height: 16px; stroke: #000; }
 
     .navbar-cta {
       display: inline-flex;
@@ -284,6 +279,10 @@
     /* Hero Section */
     .hero {
       padding: 120px 48px 80px;
+      max-width: 100%;
+      background: var(--bg-white);
+    }
+    .hero-inner {
       max-width: 1300px;
       margin: 0 auto;
     }
@@ -500,7 +499,7 @@
       background-color: var(--accent);
       color: var(--bg-dark);
       padding: 80px 48px;
-      margin: 80px 0;
+      margin: 0;
     }
 
     .stats-banner-container {
@@ -547,187 +546,161 @@
       margin-top: 40px;
     }
 
-    /* Contact Section */
-    .contact {
-      background-color: var(--bg-dark);
-      color: var(--bg-white);
-      padding: 80px 48px;
+    /* ===== CONTACT SECTION ===== */
+    .contact-section {
+      background: var(--bg-dark);
+      color: #fff;
+      padding: 100px 48px;
     }
-
-    .contact-container {
+    .contact-inner {
       max-width: 1300px;
       margin: 0 auto;
-    }
-
-    .contact-accent-bar {
-      width: 48px;
-      height: 4px;
-      background-color: var(--accent);
-      margin-bottom: 32px;
-      border-radius: 2px;
-    }
-
-    .contact h2 {
-      color: var(--bg-white);
-      margin-bottom: 60px;
-    }
-
-    .contact-content {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
+      grid-template-columns: 1fr 1.2fr;
       gap: 80px;
     }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .contact-left h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 400;
+      letter-spacing: -1.2px;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.1;
     }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .contact-left .accent-bar {
+      width: 48px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 32px;
     }
-
-    .form-group label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--bg-white);
+    .contact-left p {
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 40px;
     }
-
-    .form-group input,
-    .form-group textarea {
-      padding: 14px 16px;
-      border: 1px solid var(--border-dark);
-      border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.05);
-      color: var(--bg-white);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      background-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
     .contact-info {
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 16px;
     }
-
-    .info-item {
+    .contact-info-item {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .info-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.6);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .info-value {
-      font-size: 16px;
-      color: var(--bg-white);
-      text-decoration: none;
-    }
-
-    .info-value:hover {
-      color: var(--accent);
-    }
-
-    /* Footer */
-    .footer {
-      background-color: var(--bg-dark);
-      border-top: 1px solid var(--border-dark);
-      padding: 60px 48px 40px;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    .footer-container {
-      max-width: 1300px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      margin-bottom: 40px;
-    }
-
-    .footer-column h4 {
-      color: var(--bg-white);
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .footer-column ul {
-      list-style: none;
-    }
-
-    .footer-column li {
-      margin-bottom: 12px;
-    }
-
-    .footer-column a {
-      color: rgba(255, 255, 255, 0.6);
-      text-decoration: none;
-      font-size: 14px;
-      transition: color 0.3s ease;
-    }
-
-    .footer-column a:hover {
-      color: var(--accent);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--border-dark);
-      padding-top: 40px;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 16px;
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+    }
+    .contact-info-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(212,255,0,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-info-icon svg { width: 20px; height: 20px; color: var(--accent); }
+
+    /* ===== FORM ===== */
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255,255,255,0.5);
+    }
+    .form-group input,
+    .form-group textarea {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .form-footer span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
     }
 
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
     .footer-logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
       text-decoration: none;
-      color: var(--bg-white);
       font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: 16px;
+      font-weight: 500;
+      font-size: 15px;
     }
-
-    .footer-logo .logo-icon {
-      width: 32px;
-      height: 32px;
+    .footer-logo svg { width: 28px; height: 28px; opacity: 0.6; }
+    .footer-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.12);
     }
-
-    .footer-copyright {
+    .footer-left a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+    .footer-left a svg { width: 14px; height: 14px; }
+    .footer-left a:hover { color: rgba(255,255,255,0.7); }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-right a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .footer-right a:hover { color: rgba(255,255,255,0.7); }
 
     /* Responsive */
     @media (max-width: 1024px) {
@@ -778,20 +751,11 @@
         gap: 24px;
       }
 
-      .contact-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-section { padding: 60px 24px; }
 
-      .footer-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        gap: 24px;
-        text-align: center;
-      }
+      .footer { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
     }
 
     @media (max-width: 768px) {
@@ -893,15 +857,14 @@
         font-size: 24px;
       }
 
-      .contact-content {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-inner {
         grid-template-columns: 1fr;
         gap: 24px;
       }
 
-      .footer-container {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
+      .footer { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
 
       .hero-accent-bar {
         width: 40px;
@@ -909,7 +872,7 @@
         margin-bottom: 24px;
       }
 
-      .contact-accent-bar {
+      .contact-left .accent-bar {
         width: 40px;
         height: 3px;
         margin-bottom: 24px;
@@ -953,17 +916,19 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-accent-bar"></div>
-    <h1>Baliace systémy, ktoré zrýchlia balenie a znížia chyby</h1>
-    <p>Dodáme riešenie podľa vašej prevádzky — od poloautomatov až po komplexné baliace pracoviská. Dôležitý je výsledok: výkon, stabilita a bezpečné zásielky.</p>
-    <a href="#kontakt" class="btn-primary">
-      Kontaktujte nás – nezáväzný dopyt
-      <span class="arrow">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </span>
-    </a>
+    <div class="hero-inner">
+      <div class="hero-accent-bar"></div>
+      <h1>Baliace systémy, ktoré zrýchlia balenie a znížia chyby</h1>
+      <p>Dodáme riešenie podľa vašej prevádzky — od poloautomatov až po komplexné baliace pracoviská. Dôležitý je výsledok: výkon, stabilita a bezpečné zásielky.</p>
+      <a href="#kontakt" class="btn-primary">
+        Kontaktujte nás – nezáväzný dopyt
+        <span class="arrow">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
   </section>
 
   <!-- Solutions Grid -->
@@ -1146,97 +1111,75 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section class="contact" id="kontakt">
-    <div class="contact-container">
-      <div class="contact-accent-bar"></div>
-      <h2>Povedzte nám, čo balíte.</h2>
-      <div class="contact-content">
-        <form class="contact-form">
-          <div class="form-group">
-            <label for="name">Meno a priezvisko</label>
-            <input type="text" id="name" name="name" placeholder="Vaše meno" required>
-          </div>
-          <div class="form-group">
-            <label for="company">Názov spoločnosti</label>
-            <input type="text" id="company" name="company" placeholder="Vaša spoločnosť" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="vas@email.sk" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Telefón</label>
-            <input type="tel" id="phone" name="phone" placeholder="+421 ...">
-          </div>
-          <div class="form-group">
-            <label for="message">Správa</label>
-            <textarea id="message" name="message" placeholder="Povedzte nám viac o vašich potrebách..." required></textarea>
-          </div>
-          <button type="submit" class="btn-primary">
-            Odoslať dopyt
-            <span class="arrow">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </button>
-        </form>
+  <!-- CONTACT -->
+  <section class="contact-section" id="kontakt">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="accent-bar"></div>
+        <h2>Povedzte nám,<br>čo balíte.</h2>
+        <p>Napíšte nám typ tovaru, objemy a spôsob balenia. Ozveme sa s odporúčaním a cenovou ponukou do 24 hodín.</p>
         <div class="contact-info">
-          <div class="info-item">
-            <div class="info-label">Email</div>
-            <a href="mailto:info@quatropack.sk" class="info-value">info@quatropack.sk</a>
+          <div class="contact-info-item">
+            <span class="contact-info-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </span>
+            info@quatropack.sk
           </div>
-          <div class="info-item">
-            <div class="info-label">Telefón</div>
-            <a href="tel:+421123456789" class="info-value">+421 1 2345 6789</a>
+          <div class="contact-info-item">
+            <span class="contact-info-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            +421 900 000 000
           </div>
-          <div class="info-item">
-            <div class="info-label">Lokalita</div>
-            <div class="info-value">Bratislava, Slovensko</div>
+          <div class="contact-info-item">
+            <span class="contact-info-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            Slovenská republika
           </div>
         </div>
       </div>
+      <form class="contact-form" onsubmit="event.preventDefault()">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Meno a firma</label>
+            <input type="text" placeholder="Ján Novák, s.r.o.">
+          </div>
+          <div class="form-group">
+            <label>Telefón / e-mail</label>
+            <input type="text" placeholder="jan@firma.sk">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Čo balíte</label>
+            <input type="text" placeholder="napr. palety, kartóny…">
+          </div>
+          <div class="form-group">
+            <label>Objem denne / týždenne</label>
+            <input type="text" placeholder="napr. 200 ks / deň">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Správa</label>
+          <textarea placeholder="Popíšte váš aktuálny spôsob balenia alebo problém, ktorý chcete riešiť…"></textarea>
+        </div>
+        <div class="form-footer">
+          <span>Konzultácia aj návrh riešenia sú nezáväzné.</span>
+          <button type="submit" class="btn-accent">
+            Odoslať dopyt
+            <span class="arrow">
+              <svg fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+        </div>
+      </form>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-column">
-        <h4>Produkty</h4>
-        <ul>
-          <li><a href="baliace-systemy.html">Baliace systémy</a></li>
-          <li><a href="baliace-materialy.html">Baliace materiály</a></li>
-          <li><a href="#"> Služby</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Spoločnosť</h4>
-        <ul>
-          <li><a href="#">O nás</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Kariéry</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Zdroje</h4>
-        <ul>
-          <li><a href="#">Dokumentácia</a></li>
-          <li><a href="#">Podpora</a></li>
-          <li><a href="#">Status</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Právne</h4>
-        <ul>
-          <li><a href="#">Politika ochrany údajov</a></li>
-          <li><a href="#">Podmienky použitia</a></li>
-          <li><a href="#">Cookies</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
+    <div class="footer-left">
       <a href="index.html" class="footer-logo">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
           <defs>
@@ -1248,7 +1191,25 @@
         </svg>
         Quatropack
       </a>
-      <div class="footer-copyright">© 2024 Quatropack. Všetky práva vyhradené.</div>
+      <span class="footer-divider"></span>
+      <a href="https://maps.google.com/?q=Šamorínska+4152,+903+01+Senec">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Šamorínska 4152, 903 01 Senec
+      </a>
+      <a href="tel:+421903757222">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +421 903 757 222
+      </a>
+      <a href="mailto:objednavky@tripsy.sk">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        objednavky@tripsy.sk
+      </a>
+    </div>
+    <div class="footer-right">
+      <a href="index.html">Úvod</a>
+      <a href="baliace-systemy.html">Baliace systémy</a>
+      <a href="baliace-materialy.html">Baliace materiály</a>
+      <span>© 2026 Quatropack</span>
     </div>
   </footer>
 </body>
