@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baliace systémy | Quatropack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables */
+    :root {
+      --text-primary: #2D2E3A;
+      --text-secondary: #6B6D85;
+      --text-muted: #8E90A6;
+      --accent: #D4FF00;
+      --bg-light: #F5F5F5;
+      --bg-white: #FFFFFF;
+      --bg-dark: #000000;
+      --border-light: rgba(0,0,0,0.06);
+      --border-dark: rgba(255,255,255,0.12);
+    }
+
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-size: 42px;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 16px 48px;
+    }
+
+    .navbar-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 20px;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 48px;
+      list-style: none;
+    }
+
+    .navbar-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .navbar-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .navbar-links a.active {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .navbar-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 2.5px;
+      background: var(--text-primary);
+      border-radius: 2px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      border: none;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: padding 0.3s ease;
+      position: relative;
+    }
+
+    .btn-primary:hover {
+      padding-right: 42px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-primary:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    .btn-primary .arrow {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary .arrow svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      border: none;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: padding 0.3s ease;
+    }
+
+    .btn-dark:hover {
+      padding-right: 40px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-dark:hover svg {
+      transform: translateX(4px);
+    }
+
+    .btn-dark svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background-color: var(--accent);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: padding 0.3s ease;
+    }
+
+    .btn-accent:hover {
+      padding-right: 38px;
+      box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
+    }
+
+    .btn-accent:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    .btn-accent .arrow {
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+    }
+
+    .navbar-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      border: none;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: padding 0.3s ease;
+    }
+
+    .navbar-cta:hover {
+      padding-right: 30px;
+    }
+
+    .navbar-cta:hover svg {
+      transform: translateX(4px);
+    }
+
+    .navbar-cta svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 48px 80px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .hero-accent-bar {
+      width: 48px;
+      height: 4px;
+      background-color: var(--accent);
+      margin-bottom: 32px;
+      border-radius: 2px;
+    }
+
+    .hero h1 {
+      margin-bottom: 24px;
+      max-width: 900px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin-bottom: 40px;
+    }
+
+    /* Solutions Grid */
+    .solutions {
+      padding: 80px 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .solutions h2 {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .solutions-grid-row2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      max-width: 66.66%;
+      margin: 0 auto;
+    }
+
+    .solution-card {
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .solution-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .solution-icon {
+      width: 52px;
+      height: 52px;
+      background-color: var(--bg-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .solution-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .solution-card h3 {
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+
+    .solution-card p {
+      font-size: 15px;
+    }
+
+    /* Benefits Section */
+    .benefits {
+      padding: 80px 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .benefits h2 {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .benefits-card {
+      background-color: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .benefits-list {
+      list-style: none;
+    }
+
+    .benefits-list li {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      color: var(--text-secondary);
+      font-size: 16px;
+    }
+
+    .benefit-checkmark {
+      width: 36px;
+      height: 36px;
+      background-color: var(--bg-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .benefit-checkmark svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--bg-white);
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Delivery Support Section */
+    .delivery {
+      padding: 80px 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .delivery h2 {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .delivery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .delivery-grid-row2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      max-width: 66.66%;
+      margin: 0 auto;
+    }
+
+    .delivery-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+      padding: 40px;
+      background-color: var(--bg-light);
+      border-radius: 16px;
+    }
+
+    .delivery-icon {
+      width: 48px;
+      height: 48px;
+      background-color: var(--bg-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .delivery-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .delivery-card p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin: 0;
+    }
+
+    /* Stats Banner */
+    .stats-banner {
+      background-color: var(--accent);
+      color: var(--bg-dark);
+      padding: 80px 48px;
+      margin: 80px 0;
+    }
+
+    .stats-banner-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stats-banner h2 {
+      margin-bottom: 24px;
+    }
+
+    .stats-banner > p {
+      font-size: 18px;
+      color: var(--bg-dark);
+      margin-bottom: 60px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stats-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 28px;
+      color: var(--bg-dark);
+      margin-bottom: 12px;
+    }
+
+    .stat-item p {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 15px;
+    }
+
+    .stats-banner .btn-dark {
+      margin-top: 40px;
+    }
+
+    /* Contact Section */
+    .contact {
+      background-color: var(--bg-dark);
+      color: var(--bg-white);
+      padding: 80px 48px;
+    }
+
+    .contact-container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .contact-accent-bar {
+      width: 48px;
+      height: 4px;
+      background-color: var(--accent);
+      margin-bottom: 32px;
+      border-radius: 2px;
+    }
+
+    .contact h2 {
+      color: var(--bg-white);
+      margin-bottom: 60px;
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--bg-white);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 14px 16px;
+      border: 1px solid var(--border-dark);
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--bg-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .info-value {
+      font-size: 16px;
+      color: var(--bg-white);
+      text-decoration: none;
+    }
+
+    .info-value:hover {
+      color: var(--accent);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--bg-dark);
+      border-top: 1px solid var(--border-dark);
+      padding: 60px 48px 40px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h4 {
+      color: var(--bg-white);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 12px;
+    }
+
+    .footer-column a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border-dark);
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--bg-white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .footer-logo .logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      h1 {
+        font-size: 44px;
+      }
+
+      h2 {
+        font-size: 32px;
+      }
+
+      .navbar {
+        padding: 12px 36px;
+      }
+
+      .navbar-container {
+        gap: 24px;
+      }
+
+      .navbar-links {
+        gap: 32px;
+      }
+
+      .hero {
+        padding: 80px 36px 60px;
+      }
+
+      .solutions,
+      .benefits,
+      .delivery,
+      .contact,
+      .footer {
+        padding: 60px 36px;
+      }
+
+      .solutions-grid,
+      .delivery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .solutions-grid-row2,
+      .delivery-grid-row2 {
+        max-width: 100%;
+      }
+
+      .stats-columns {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      .navbar {
+        padding: 12px 20px;
+      }
+
+      .navbar-menu {
+        gap: 20px;
+      }
+
+      .navbar-links {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        gap: 0;
+        display: none;
+        background: var(--bg-white);
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .navbar-links.active {
+        display: flex;
+      }
+
+      .navbar-links li {
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .navbar-links a {
+        padding: 16px 20px;
+        display: block;
+      }
+
+      .hero {
+        padding: 60px 20px 40px;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .solutions,
+      .benefits,
+      .delivery,
+      .contact,
+      .footer {
+        padding: 40px 20px;
+      }
+
+      .solutions h2,
+      .benefits h2,
+      .delivery h2,
+      .contact h2 {
+        margin-bottom: 40px;
+      }
+
+      .solutions-grid,
+      .delivery-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .solutions-grid-row2,
+      .delivery-grid-row2 {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-card,
+      .delivery-card,
+      .benefits-card {
+        padding: 24px;
+      }
+
+      .stats-columns {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .stat-item h3 {
+        font-size: 24px;
+      }
+
+      .contact-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .hero-accent-bar {
+        width: 40px;
+        height: 3px;
+        margin-bottom: 24px;
+      }
+
+      .contact-accent-bar {
+        width: 40px;
+        height: 3px;
+        margin-bottom: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+          <defs>
+            <clipPath id="sq-nav"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath>
+            <linearGradient id="bg-nav" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#353647"/><stop offset="100%" stop-color="#23242F"/></linearGradient>
+            <linearGradient id="qg-nav" x1="32" y1="28" x2="95" y2="95" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#ffffff"/><stop offset="70%" stop-color="#c8cad4"/><stop offset="100%" stop-color="#9a9db0"/></linearGradient>
+          </defs>
+          <g clip-path="url(#sq-nav)"><rect width="120" height="120" fill="url(#bg-nav)"/></g>
+          <circle cx="55" cy="52" r="23" stroke="url(#qg-nav)" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+          <line x1="69" y1="66" x2="90" y2="90" stroke="url(#qg-nav)" stroke-width="7.5" stroke-linecap="round"/>
+        </svg>
+        Quatropack
+      </a>
+      <div class="navbar-menu">
+        <ul class="navbar-links">
+          <li><a href="index.html">Úvod</a></li>
+          <li><a href="baliace-systemy.html" class="active">Baliace systémy</a></li>
+          <li><a href="baliace-materialy.html">Baliace materiály</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+        <a href="#kontakt" class="navbar-cta">
+          Kontaktujte nás
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-accent-bar"></div>
+    <h1>Baliace systémy, ktoré zrýchlia balenie a znížia chyby</h1>
+    <p>Dodáme riešenie podľa vašej prevádzky — od poloautomatov až po komplexné baliace pracoviská. Dôležitý je výsledok: výkon, stabilita a bezpečné zásielky.</p>
+    <a href="#kontakt" class="btn-primary">
+      Kontaktujte nás – nezáväzný dopyt
+      <span class="arrow">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+  </section>
+
+  <!-- Solutions Grid -->
+  <section class="solutions">
+    <h2>Riešenia podľa potreby prevádzky</h2>
+    <div class="solutions-grid">
+      <div class="solution-card">
+        <div class="solution-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 14c0-3.314 2.686-6 6-6s6 2.686 6 6M10 20h12M6 26h20"/>
+          </svg>
+        </div>
+        <h3>Páskovacie systémy</h3>
+        <p>Pevné uzatváranie a fixácia balíkov aj paliet.</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 8l2 14c.2 1.3 1.3 2.3 2.6 2.3h8.8c1.3 0 2.4-1 2.6-2.3l2-14M10 16h12M10 20h12M10 24h12"/>
+          </svg>
+        </div>
+        <h3>Stretch / ovinovanie</h3>
+        <p>Stabilizácia paliet a ochrana počas prepravy.</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 6h20v14H6zM10 22h12M8 26h16"/>
+          </svg>
+        </div>
+        <h3>Uzatváranie kartónov</h3>
+        <p>Rýchle a čisté uzatváranie krabíc vo väčších objemoch.</p>
+      </div>
+    </div>
+    <div class="solutions-grid-row2">
+      <div class="solution-card">
+        <div class="solution-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 10h20v12H6zM10 6v4M16 6v4M22 6v4M6 22h20"/>
+          </svg>
+        </div>
+        <h3>Baliace pracoviská</h3>
+        <p>Organizované pracovné stanice pre vyšší výkon.</p>
+      </div>
+      <div class="solution-card">
+        <div class="solution-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 12l2 12h12l2-12M6 12h20M10 4h12M10 12v4M16 12v4M22 12v4"/>
+          </svg>
+        </div>
+        <h3>Automatizované linky</h3>
+        <p>Keď ručné balenie prestáva stačiť.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <h2>Kedy má baliaci systém najväčší prínos</h2>
+    <div class="benefits-card">
+      <ul class="benefits-list">
+        <li>
+          <div class="benefit-checkmark">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          balíte denne a výkon je limit
+        </li>
+        <li>
+          <div class="benefit-checkmark">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          výsledok je nekonzistentný
+        </li>
+        <li>
+          <div class="benefit-checkmark">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          pribúdajú poškodenia a reklamácie
+        </li>
+        <li>
+          <div class="benefit-checkmark">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          balenie je časovo náročné
+        </li>
+        <li>
+          <div class="benefit-checkmark">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          spotreba materiálu je vyššia, než musí byť
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Delivery Support Section -->
+  <section class="delivery">
+    <h2>Dodávka, nastavenie, podpora</h2>
+    <div class="delivery-grid">
+      <div class="delivery-card">
+        <div class="delivery-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4v10M10 10h12M14 8l2-4 2 4"/>
+          </svg>
+        </div>
+        <p>odporúčanie riešenia podľa praxe</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 8h20v14H6zM10 14h12M10 19h12"/>
+          </svg>
+        </div>
+        <p>dodanie a inštaláciu systému</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 6c5.5 0 10 4.5 10 10s-4.5 10-10 10S6 21.5 6 16 10.5 6 16 6M16 10v6l4 2"/>
+          </svg>
+        </div>
+        <p>zaškolenie obsluhy</p>
+      </div>
+    </div>
+    <div class="delivery-grid-row2">
+      <div class="delivery-card">
+        <div class="delivery-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 12c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v12H8zM16 8V6M14 16h4"/>
+          </svg>
+        </div>
+        <p>servis a technickú podporu</p>
+      </div>
+      <div class="delivery-card">
+        <div class="delivery-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4l3 6h7l-5 4 2 6-7-5-7 5 2-6-5-4h7zM16 4v6"/>
+          </svg>
+        </div>
+        <p>prepojenie so správnym materiálom</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Banner -->
+  <section class="stats-banner">
+    <div class="stats-banner-container">
+      <h2>Zvýšte produktivitu balenia o 40%</h2>
+      <p>Naši klienti v priemere zvýšili výkon balenia o 40%, znížili chybovosť o 60% a ušetrili 25% nákladov na materiál.</p>
+      <div class="stats-columns">
+        <div class="stat-item">
+          <h3>+40%</h3>
+          <p>Rýchlosť balenia</p>
+        </div>
+        <div class="stat-item">
+          <h3>-60%</h3>
+          <p>Menej chýb</p>
+        </div>
+        <div class="stat-item">
+          <h3>-25%</h3>
+          <p>Úspora nákladov</p>
+        </div>
+      </div>
+      <a href="#kontakt" class="btn-dark">
+        Získať nezáväznú konzultáciu
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="kontakt">
+    <div class="contact-container">
+      <div class="contact-accent-bar"></div>
+      <h2>Povedzte nám, čo balíte.</h2>
+      <div class="contact-content">
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">Meno a priezvisko</label>
+            <input type="text" id="name" name="name" placeholder="Vaše meno" required>
+          </div>
+          <div class="form-group">
+            <label for="company">Názov spoločnosti</label>
+            <input type="text" id="company" name="company" placeholder="Vaša spoločnosť" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="vas@email.sk" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefón</label>
+            <input type="tel" id="phone" name="phone" placeholder="+421 ...">
+          </div>
+          <div class="form-group">
+            <label for="message">Správa</label>
+            <textarea id="message" name="message" placeholder="Povedzte nám viac o vašich potrebách..." required></textarea>
+          </div>
+          <button type="submit" class="btn-primary">
+            Odoslať dopyt
+            <span class="arrow">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+        </form>
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="info-label">Email</div>
+            <a href="mailto:info@quatropack.sk" class="info-value">info@quatropack.sk</a>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Telefón</div>
+            <a href="tel:+421123456789" class="info-value">+421 1 2345 6789</a>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Lokalita</div>
+            <div class="info-value">Bratislava, Slovensko</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>Produkty</h4>
+        <ul>
+          <li><a href="baliace-systemy.html">Baliace systémy</a></li>
+          <li><a href="baliace-materialy.html">Baliace materiály</a></li>
+          <li><a href="#"> Služby</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Spoločnosť</h4>
+        <ul>
+          <li><a href="#">O nás</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Kariéry</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Zdroje</h4>
+        <ul>
+          <li><a href="#">Dokumentácia</a></li>
+          <li><a href="#">Podpora</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Právne</h4>
+        <ul>
+          <li><a href="#">Politika ochrany údajov</a></li>
+          <li><a href="#">Podmienky použitia</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="index.html" class="footer-logo">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+          <defs>
+            <clipPath id="sq-ft"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath>
+          </defs>
+          <g clip-path="url(#sq-ft)"><rect width="120" height="120" fill="rgba(255,255,255,0.15)"/></g>
+          <circle cx="55" cy="52" r="23" stroke="rgba(255,255,255,0.6)" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+          <line x1="69" y1="66" x2="90" y2="90" stroke="rgba(255,255,255,0.6)" stroke-width="7.5" stroke-linecap="round"/>
+        </svg>
+        Quatropack
+      </a>
+      <div class="footer-copyright">© 2024 Quatropack. Všetky práva vyhradené.</div>
+    </div>
+  </footer>
+</body>
+</html>

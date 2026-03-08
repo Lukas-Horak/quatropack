@@ -101,9 +101,9 @@
       padding: 10px 24px !important;
       border-radius: 100px !important;
       font-weight: 500 !important;
-      transition: transform 0.2s ease !important;
+      transition: padding 0.3s ease !important;
     }
-    .navbar-cta:hover { transform: scale(1.05) !important; opacity: 1 !important; }
+    .navbar-cta:hover { padding-right: 30px !important; opacity: 1 !important; }
 
     /* ===== HERO ===== */
     .hero {
@@ -138,9 +138,9 @@
       border-radius: 100px;
       font-size: 16px;
       font-weight: 500;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn-primary:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .btn-primary:hover { padding-right: 42px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
     .btn-primary .arrow {
       width: 40px;
       height: 40px;
@@ -149,9 +149,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.25s ease;
+      transition: transform 0.3s ease;
     }
-    .btn-primary:hover .arrow { transform: translateX(20px); }
+    .btn-primary:hover .arrow { transform: translateX(6px); }
     .btn-primary .arrow svg { width: 18px; height: 18px; }
 
     /* ===== HERO IMAGE ===== */
@@ -256,10 +256,11 @@
       font-weight: 500;
       padding: 14px 28px;
       border-radius: 100px;
-      transition: transform 0.25s ease;
+      transition: padding 0.3s ease;
     }
-    .btn-secondary:hover { transform: scale(1.05); }
-    .btn-secondary svg { width: 18px; height: 18px; stroke: var(--accent); }
+    .btn-secondary:hover { padding-right: 36px; }
+    .btn-secondary svg { width: 18px; height: 18px; stroke: var(--accent); transition: transform 0.3s ease; }
+    .btn-secondary:hover svg { transform: translateX(4px); }
 
     /* ===== INDUSTRY PILLS ===== */
     .industry-section { text-align: center; }
@@ -412,11 +413,11 @@
       text-decoration: none;
       font-size: 16px;
       font-weight: 500;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn-dark:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-    .btn-dark svg { width: 18px; height: 18px; transition: transform 0.25s ease, stroke 0.25s ease; }
-    .btn-dark:hover svg { transform: translateX(6px); stroke: var(--accent); }
+    .btn-dark:hover { padding-right: 40px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .btn-dark svg { width: 18px; height: 18px; transition: transform 0.3s ease, stroke 0.3s ease; }
+    .btn-dark:hover svg { transform: translateX(4px); stroke: var(--accent); }
 
     /* ===== CONTACT SECTION ===== */
     .contact-section {
@@ -532,9 +533,9 @@
       font-weight: 600;
       cursor: pointer;
       font-family: var(--font-body);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
     }
-    .btn-accent:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(212,255,0,0.3); }
+    .btn-accent:hover { padding-right: 38px; box-shadow: 0 8px 24px rgba(212,255,0,0.3); }
     .btn-accent .arrow {
       width: 32px;
       height: 32px;
@@ -543,9 +544,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.25s ease;
+      transition: transform 0.3s ease;
     }
-    .btn-accent:hover .arrow { transform: translateX(20px); }
+    .btn-accent:hover .arrow { transform: translateX(6px); }
     .btn-accent .arrow svg { width: 16px; height: 16px; stroke: #000; }
 
     /* ===== FOOTER ===== */
@@ -640,8 +641,8 @@
   </a>
   <ul class="navbar-links">
     <li><a href="#uvod" class="active">Úvod</a></li>
-    <li><a href="#riesenia">Baliace systémy</a></li>
-    <li><a href="#materialy">Baliace materiály</a></li>
+    <li><a href="baliace-systemy.html">Baliace systémy</a></li>
+    <li><a href="baliace-materialy.html">Baliace materiály</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
     <li><a href="#kontakt" class="navbar-cta">Kontaktujte nás</a></li>
   </ul>
@@ -688,7 +689,7 @@
             menej poškodení a reklamácií
           </li>
         </ul>
-        <a href="#" class="btn-secondary">
+        <a href="baliace-systemy.html" class="btn-secondary">
           Pozrieť baliace systémy
           <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -714,7 +715,7 @@
             kompatibilita so strojmi aj ručným balením
           </li>
         </ul>
-        <a href="#" class="btn-secondary">
+        <a href="baliace-materialy.html" class="btn-secondary">
           Pozrieť baliace materiály
           <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -950,9 +951,9 @@
     </a>
   </div>
   <div class="footer-right">
-    <a href="#">Úvod</a>
-    <a href="#">Baliace systémy</a>
-    <a href="#">Baliace materiály</a>
+    <a href="index.html">Úvod</a>
+    <a href="baliace-systemy.html">Baliace systémy</a>
+    <a href="baliace-materialy.html">Baliace materiály</a>
     <span>© 2026 Quatropack</span>
   </div>
 </footer>
