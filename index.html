@@ -139,13 +139,14 @@
       display: flex; align-items: center; justify-content: space-between;
       gap: 32px; flex-wrap: wrap;
     }
-    .logo-strip-logos svg {
-      height: 32px; width: auto;
-      fill: rgba(0,0,0,0.15);
-      transition: fill 0.3s ease;
+    .logo-strip-logos img {
+      height: 30px; width: auto;
+      object-fit: contain;
+      filter: grayscale(100%) opacity(0.3);
+      transition: filter 0.4s ease;
     }
-    .logo-strip-logos svg:hover {
-      fill: rgba(0,0,0,0.3);
+    .logo-strip-logos img:hover {
+      filter: grayscale(0%) opacity(1);
     }
 
     /* ===== SECTIONS ===== */
@@ -494,18 +495,12 @@
   <div class="logo-strip">
     <p>Dôverujú nám</p>
     <div class="logo-strip-logos">
-      <!-- ESET -->
-      <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="26" font-weight="700" letter-spacing="2">ESET</text></svg>
-      <!-- ŠKODA -->
-      <svg viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="24" font-weight="700" letter-spacing="3">ŠKODA</text></svg>
-      <!-- IKEA -->
-      <svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="28" font-weight="700" letter-spacing="2">IKEA</text></svg>
-      <!-- HYUNDAI -->
-      <svg viewBox="0 0 170 40" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="22" font-weight="700" letter-spacing="3">HYUNDAI</text></svg>
-      <!-- SAMSUNG -->
-      <svg viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="22" font-weight="700" letter-spacing="3">SAMSUNG</text></svg>
-      <!-- OLYMPUS -->
-      <svg viewBox="0 0 170 40" xmlns="http://www.w3.org/2000/svg"><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="22" font-weight="700" letter-spacing="3">OLYMPUS</text></svg>
+      <img src="eset.svg" alt="ESET">
+      <img src="skoda.svg" alt="ŠKODA">
+      <img src="ikea.svg" alt="IKEA">
+      <img src="hyundai.svg" alt="HYUNDAI">
+      <img src="samsung.svg" alt="SAMSUNG">
+      <img src="olympus.svg" alt="OLYMPUS">
     </div>
   </div>
 
