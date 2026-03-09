@@ -9,767 +9,660 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --text-primary: #2D2E3A;
-            --text-secondary: #6B6D85;
-            --text-muted: #8E90A6;
-            --accent: #D4FF00;
-            --bg-light: #F5F5F5;
-            --bg-white: #FFFFFF;
-            --bg-dark: #000000;
-            --border-light: rgba(0,0,0,0.06);
-            --border-dark: rgba(255,255,255,0.12);
-            --font-heading: 'Space Grotesk', sans-serif;
-            --font-body: 'Inter', -apple-system, system-ui, 'Segoe UI', sans-serif;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--text-primary);
-            background: var(--bg-white);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== NAVBAR ===== */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-light);
-            padding: 0 48px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navbar-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .navbar-logo svg { width: 36px; height: 36px; }
-
-        .navbar-logo span {
-            font-family: var(--font-heading);
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: -0.3px;
-        }
-
-        .navbar-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            list-style: none;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .navbar-links a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 16px;
-            transition: color 0.2s, background 0.2s;
-        }
-
-        .navbar-links a:hover {
-            color: var(--text-primary);
-            background: rgba(0,0,0,0.04);
-        }
-
-        .navbar-links a.active {
-            color: #000;
-            font-weight: 600;
-            position: relative;
-        }
-
-        .navbar-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 2.5px;
-            background: #000;
-            border-radius: 2px;
-        }
-
-        .navbar-cta {
-            background: #000;
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 100px;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: background 0.25s ease, color 0.25s ease;
-        }
-
-        .navbar-cta:hover {
-            background: var(--accent);
-            color: #000;
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            padding: 80px 48px 60px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-family: var(--font-heading);
-            font-size: clamp(48px, 7vw, 96px);
-            font-weight: 400;
-            line-height: 1.05;
-            letter-spacing: -1.92px;
-            color: var(--text-primary);
-            margin-bottom: 32px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 520px;
-            line-height: 1.7;
-            margin-bottom: 40px;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            padding: 18px 32px 18px 32px;
-            border-radius: 100px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: padding 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.25s cubic-bezier(0.22, 0.61, 0.36, 1) 0.02s;
-        }
-
-        .btn-primary:hover {
-            padding-right: 52px;
-            color: var(--accent);
-        }
-
-        .btn-primary .arrow {
-            width: 40px;
-            height: 40px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) 0.03s;
-        }
-
-        .btn-primary:hover .arrow {
-            transform: translateX(12px);
-        }
-
-        .btn-primary .arrow svg {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.12s;
-        }
-
-        .btn-primary:hover .arrow svg {
-            transform: translateX(2px);
-        }
-
-        /* ===== HERO IMAGE ===== */
-        .hero-image {
-            width: 100%;
-            height: 500px;
-            background: url('https://action-double-79826116.figma.site/_assets/v11/396267b32d899dd1f680c7b9a7d1291bba5122c1.png') center/cover no-repeat;
-            filter: grayscale(100%);
-        }
-
-        /* ===== SECTIONS ===== */
-        .section {
-            padding: 80px 48px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .section-bg { background: var(--bg-light); }
-
-        .section h2 {
-            font-family: var(--font-heading);
-            font-size: clamp(32px, 4vw, 48px);
-            font-weight: 400;
-            letter-spacing: -0.96px;
-            color: var(--text-primary);
-            margin-bottom: 48px;
-        }
-
-        /* ===== SOLUTIONS CARDS ===== */
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-        }
-
-        .solution-card {
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 40px;
-            transition: box-shadow 0.3s;
-        }
-
-
-        .solution-icon {
-            width: 52px;
-            height: 52px;
-            background: var(--bg-dark);
-            border: 2px solid var(--border-dark);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            box-shadow: 0 3px 4px -1px rgba(42,42,42,0.14), 0 1px 1px rgba(42,42,42,0.08);
-        }
-
-        .solution-icon svg { width: 24px; height: 24px; color: var(--accent); }
-
-        .solution-card h3 {
-            font-family: var(--font-heading);
-            font-size: 28px;
-            font-weight: 500;
-            margin-bottom: 16px;
-            color: var(--text-primary);
-        }
-
-        .solution-card > p {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .check-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .check-list li {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 15px;
-            color: var(--text-secondary);
-        }
-
-        .check-icon {
-            width: 24px;
-            height: 24px;
-            background: var(--text-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .check-icon svg { width: 14px; height: 14px; color: #fff; }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #000;
-            color: #fff;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            padding: 14px 28px;
-            border-radius: 100px;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .btn-secondary:hover { }
-
-        .btn-secondary svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--accent);
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .btn-secondary:hover svg { transform: translateX(4px); }
-
-        /* ===== INDUSTRY PILLS ===== */
-        .industry-section { text-align: center; }
-        .industry-section h2 { margin-bottom: 8px; }
-
-        .industry-section > p {
-            color: var(--text-secondary);
-            font-size: 16px;
-            margin-bottom: 40px;
-        }
-
-        .pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 0;
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: 100px;
-            padding: 12px 20px;
-            font-size: 16px;
-            font-weight: 400;
-            color: var(--text-primary);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
-
-        .pill svg { width: 20px; height: 20px; color: var(--text-secondary); }
-
-        /* ===== PROCESS STEPS ===== */
-        .process-section {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 80px;
-            align-items: start;
-        }
-
-        .process-section h2 {
-            font-size: clamp(32px, 4vw, 48px);
-            line-height: 1.15;
-            position: sticky;
-            top: 100px;
-        }
-
-        .steps { display: flex; flex-direction: column; }
-
-        .step {
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            gap: 16px;
-            padding: 28px 0;
-            border-bottom: 1px solid var(--border-light);
-            align-items: start;
-        }
-
-        .step:first-child { border-top: 1px solid var(--border-light); }
-
-        .step-number {
-            font-family: var(--font-heading);
-            font-size: 48px;
-            font-weight: 300;
-            color: rgba(45,46,58,0.12);
-            line-height: 1;
-        }
-
-        .step h4 {
-            font-family: var(--font-heading);
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: var(--text-primary);
-        }
-
-        .step p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* ===== FAQ ===== */
-        .faq-section {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-section h2 { text-align: center; margin-bottom: 48px; }
-
-        .faq-item {
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            background: var(--bg-white);
-            overflow: hidden;
-        }
-
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-primary);
-            user-select: none;
-        }
-
-        .faq-question:hover { background: rgba(0,0,0,0.02); }
-
-        .faq-chevron {
-            width: 20px;
-            height: 20px;
-            color: var(--text-muted);
-            transition: transform 0.3s;
-            flex-shrink: 0;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-
-        .faq-answer-inner {
-            padding: 0 24px 20px;
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .faq-item.open .faq-answer { max-height: 200px; }
-        .faq-item.open .faq-chevron { transform: rotate(180deg); }
-
-        /* ===== CTA BANNER ===== */
-        .cta-banner {
-            text-align: center;
-            background: var(--bg-white);
-            border-radius: 20px;
-            padding: 80px 48px;
-            max-width: 900px;
-            margin: 0 auto;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-        }
-
-        .cta-banner h2 {
-            font-family: var(--font-heading);
-            font-size: clamp(32px, 4vw, 48px);
-            font-weight: 400;
-            margin-bottom: 16px;
-        }
-
-        .cta-banner p {
-            color: var(--text-secondary);
-            font-size: 16px;
-            margin-bottom: 32px;
-            max-width: 560px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-dark {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: #000;
-            color: #fff;
-            padding: 16px 32px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .btn-dark svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--accent);
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .btn-dark:hover svg {
-            transform: translateX(4px);
-        }
-
-        /* ===== CONTACT SECTION ===== */
-        .contact-section {
-            background: var(--bg-dark);
-            color: #fff;
-            padding: 100px 48px;
-        }
-
-        .contact-inner {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 80px;
-        }
-
-        .contact-left h2 {
-            font-family: var(--font-heading);
-            font-size: clamp(36px, 5vw, 60px);
-            font-weight: 400;
-            letter-spacing: -1.2px;
-            color: #fff;
-            margin-bottom: 24px;
-            line-height: 1.1;
-        }
-
-        .contact-left .accent-bar {
-            width: 48px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-            margin-bottom: 32px;
-        }
-
-        .contact-left p {
-            color: rgba(255,255,255,0.6);
-            font-size: 16px;
-            line-height: 1.7;
-            margin-bottom: 40px;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .contact-info-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            color: rgba(255,255,255,0.7);
-            font-size: 15px;
-        }
-
-        .contact-info-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(212,255,0,0.12);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .contact-info-icon svg { width: 20px; height: 20px; color: var(--accent); }
-
-        /* ===== FORM ===== */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label {
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 10px;
-            padding: 14px 16px;
-            color: #fff;
-            font-family: var(--font-body);
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
-
-        .form-group input:focus,
-        .form-group textarea:focus { border-color: var(--accent); }
-
-        .form-group textarea { min-height: 140px; resize: vertical; }
-
-        .form-group.has-error input,
-        .form-group.has-error textarea {
-            border-color: #FF6B6B;
-        }
-
-        .form-error {
-            font-size: 13px;
-            color: #FF6B6B;
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
-            margin-top: 0;
-        }
-
-        .form-group.has-error .form-error {
-            opacity: 1;
-            max-height: 40px;
-            margin-top: 6px;
-        }
-
-        .form-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            margin-top: 8px;
-        }
-
-        .form-footer span { font-size: 13px; color: rgba(255,255,255,0.4); }
-
-        .btn-accent {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--accent);
-            border: none;
-            color: #000;
-            padding: 16px 28px;
-            border-radius: 100px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: var(--font-body);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .btn-accent:hover { }
-
-        .btn-accent .arrow {
-            width: 32px;
-            height: 32px;
-            background: rgba(0,0,0,0.15);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .btn-accent:hover .arrow { transform: translateX(4px); }
-        .btn-accent .arrow svg { width: 16px; height: 16px; stroke: #000; }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            background: var(--bg-dark);
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding: 24px 48px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: rgba(255,255,255,0.4);
-            font-size: 13px;
-        }
-
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-family: var(--font-heading);
-            font-weight: 500;
-            font-size: 15px;
-        }
-
-        .footer-logo svg { width: 28px; height: 28px; opacity: 0.6; }
-
-        .footer-divider {
-            width: 1px;
-            height: 20px;
-            background: rgba(255,255,255,0.12);
-        }
-
-        .footer-left a {
-            color: rgba(255,255,255,0.4);
-            text-decoration: none;
-            font-size: 13px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .footer-left a svg { width: 14px; height: 14px; }
-        .footer-left a:hover { color: rgba(255,255,255,0.7); }
-
-        .footer-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .footer-right a {
-            color: rgba(255,255,255,0.4);
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .footer-right a:hover { color: rgba(255,255,255,0.7); }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .navbar { padding: 0 24px; }
-            .hero, .section { padding: 60px 24px; }
-            .solutions-grid { grid-template-columns: 1fr; }
-            .process-section { grid-template-columns: 1fr; gap: 40px; }
-            .contact-inner { grid-template-columns: 1fr; gap: 48px; }
-            .contact-section { padding: 60px 24px; }
-        }
-
-        @media (max-width: 768px) {
-            .navbar-links { display: none; }
-            .hero h1 { font-size: 40px; letter-spacing: -0.8px; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer { flex-direction: column; gap: 16px; text-align: center; }
-            .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
-            .cta-banner { padding: 48px 24px; margin: 0 24px 48px; }
-        }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --text-primary: #2D2E3A;
+      --text-secondary: #6B6D85;
+      --text-muted: #8E90A6;
+      --accent: #D4FF00;
+      --bg-light: #F5F5F5;
+      --bg-white: #FFFFFF;
+      --bg-dark: #000000;
+      --border-light: rgba(0,0,0,0.06);
+      --border-dark: rgba(255,255,255,0.12);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', -apple-system, system-ui, 'Segoe UI', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background: var(--bg-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    .navbar-logo svg { width: 36px; height: 36px; }
+    .navbar-logo span {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+    .navbar-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .navbar-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 16px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .navbar-links a:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
+    .navbar-links a.active {
+      color: #000;
+      font-weight: 600;
+      position: relative;
+    }
+    .navbar-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 2.5px;
+      background: #000;
+      border-radius: 2px;
+    }
+    .navbar-cta {
+      background: #000;
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .navbar-cta:hover { background: var(--accent); color: #000; }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 80px 48px 60px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(48px, 7vw, 96px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -1.92px;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+      max-width: 8.5em;
+    }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      padding: 18px 32px 18px 32px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 500;
+      transition: padding 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.25s cubic-bezier(0.22, 0.61, 0.36, 1) 0.02s;
+    }
+    .btn-primary:hover { padding-right: 52px; color: var(--accent); }
+    .btn-primary .arrow {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1) 0.03s;
+    }
+    .btn-primary:hover .arrow { transform: translateX(12px); }
+    .btn-primary .arrow svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0.12s;
+    }
+    .btn-primary:hover .arrow svg { transform: translateX(2px); }
+
+    /* ===== HERO IMAGE ===== */
+    .hero-image {
+      width: 100%;
+      height: 500px;
+      background: url('https://action-double-79826116.figma.site/_assets/v11/396267b32d899dd1f680c7b9a7d1291bba5122c1.png') center/cover no-repeat;
+      filter: grayscale(100%);
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 80px 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .section-bg {
+      background: var(--bg-light);
+    }
+    .section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      letter-spacing: -0.96px;
+      color: var(--text-primary);
+      margin-bottom: 48px;
+    }
+
+    /* ===== SOLUTIONS CARDS ===== */
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .solution-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 40px;
+      transition: box-shadow 0.3s;
+    }
+    .solution-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--bg-dark);
+      border: 2px solid var(--border-dark);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 3px 4px -1px rgba(42,42,42,0.14), 0 1px 1px rgba(42,42,42,0.08);
+    }
+    .solution-icon svg { width: 24px; height: 24px; color: var(--accent); }
+    .solution-card h3 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .solution-card > p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--text-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .check-icon svg { width: 14px; height: 14px; color: #fff; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: 100px;
+      transition: box-shadow 0.3s ease;
+    }
+    .btn-secondary:hover { }
+    .btn-secondary svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-secondary:hover svg { transform: translateX(4px); }
+
+    /* ===== INDUSTRY PILLS ===== */
+    .industry-section { text-align: center; }
+    .industry-section h2 { margin-bottom: 8px; }
+    .industry-section > p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 100px;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .pill svg { width: 20px; height: 20px; color: var(--text-secondary); }
+
+    /* ===== PROCESS STEPS ===== */
+    .process-section {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .process-section h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.15;
+      position: sticky;
+      top: 100px;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: start;
+    }
+    .step:first-child { border-top: 1px solid var(--border-light); }
+    .step-number {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      font-weight: 300;
+      color: rgba(45,46,58,0.12);
+      line-height: 1;
+    }
+    .step h4 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    .step p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-section { max-width: 800px; margin: 0 auto; }
+    .faq-section h2 { text-align: center; margin-bottom: 48px; }
+    .faq-item {
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      background: var(--bg-white);
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      user-select: none;
+    }
+    .faq-question:hover { background: rgba(0,0,0,0.02); }
+    .faq-chevron {
+      width: 20px;
+      height: 20px;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 24px 20px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+    /* ===== CTA BANNER ===== */
+    .cta-banner {
+      text-align: center;
+      background: var(--bg-white);
+      border-radius: 20px;
+      padding: 80px 48px;
+      max-width: 900px;
+      margin: 0 auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .cta-banner h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin-bottom: 32px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #000;
+      color: #fff;
+      padding: 16px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .btn-dark svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--accent);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-dark:hover svg { transform: translateX(4px); }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact-section {
+      background: var(--bg-dark);
+      color: #fff;
+      padding: 100px 48px;
+    }
+    .contact-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+    }
+    .contact-left h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 400;
+      letter-spacing: -1.2px;
+      color: #fff;
+      margin-bottom: 24px;
+      line-height: 1.1;
+    }
+    .contact-left .accent-bar {
+      width: 48px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+    .contact-left p {
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+    }
+    .contact-info-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(212,255,0,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-info-icon svg { width: 20px; height: 20px; color: var(--accent); }
+
+    /* ===== FORM ===== */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: rgba(255,255,255,0.5);
+    }
+    .form-group input, .form-group textarea {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 140px; resize: vertical; }
+    .form-group.has-error input, .form-group.has-error textarea { border-color: #FF6B6B; }
+    .form-error {
+      font-size: 13px;
+      color: #FF6B6B;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
+      margin-top: 0;
+    }
+    .form-group.has-error .form-error {
+      opacity: 1;
+      max-height: 40px;
+      margin-top: 6px;
+    }
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .form-footer span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+    .btn-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent);
+      border: none;
+      color: #000;
+      padding: 16px 28px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: box-shadow 0.3s ease;
+    }
+    .btn-accent:hover { }
+    .btn-accent .arrow {
+      width: 32px;
+      height: 32px;
+      background: rgba(0,0,0,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-accent:hover .arrow { transform: translateX(4px); }
+    .btn-accent .arrow svg { width: 16px; height: 16px; stroke: #000; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-weight: 500;
+      font-size: 15px;
+    }
+    .footer-logo svg { width: 28px; height: 28px; opacity: 0.6; }
+    .footer-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.12);
+    }
+    .footer-left a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-left a svg { width: 14px; height: 14px; }
+    .footer-left a:hover { color: rgba(255,255,255,0.7); }
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .footer-right a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .footer-right a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .navbar { padding: 0 24px; }
+      .hero, .section { padding: 60px 24px; }
+      .solutions-grid { grid-template-columns: 1fr; }
+      .process-section { grid-template-columns: 1fr; gap: 40px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-section { padding: 60px 24px; }
+    }
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+      .hero h1 { font-size: 40px; letter-spacing: -0.8px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
+      .cta-banner { padding: 48px 24px; margin: 0 24px 48px; }
+    }
     </style>
 </head>
 <body>
@@ -789,7 +682,6 @@
         </svg>
         <span>Quatropack</span>
     </a>
-
     <ul class="navbar-links">
         <li><a href="#uvod" class="active">Úvod</a></li>
         <li><a href="baliace-systemy.html">Baliace systémy</a></li>
@@ -826,25 +718,15 @@
                 <h3>Baliace systémy</h3>
                 <p>Automatizované a poloautomatické riešenia pre rýchle a bezpečné balenie – od samostatných zariadení až po kompletné baliace pracoviská na mieru.</p>
                 <ul class="check-list">
-                    <li>
-                        <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        vyšší výkon balenia
-                    </li>
-                    <li>
-                        <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        konzistentná kvalita a pevnosť zásielok
-                    </li>
-                    <li>
-                        <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        menej poškodení a reklamácií
-                    </li>
+                    <li><span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> vyšší výkon balenia</li>
+                    <li><span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> konzistentná kvalita a pevnosť zásielok</li>
+                    <li><span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> menej poškodení a reklamácií</li>
                 </ul>
                 <a href="baliace-systemy.html" class="btn-secondary">
                     Pozrieť baliace systémy
                     <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
             </div>
-
             <!-- Card 2 -->
             <div class="solution-card">
                 <div class="solution-icon">
@@ -853,18 +735,9 @@
                 <h3>Baliace materiály</h3>
                 <p>Spotrebný materiál pre každodennú prevádzku – fólie, pásky a ochranné prvky. Vyberieme správny typ podľa produktov, objemov a spôsobu balenia.</p>
                 <ul class="check-list">
-                    <li>
-                        <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        ochrana tovaru počas prepravy
-                    </li>
-                    <li>
-                        <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        optimalizácia spotreby a nákladov
-                    </li>
-                    <li>
-                        <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
-                        kompatibilita so strojmi aj ručným balením
-                    </li>
+                    <li><span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> ochrana tovaru počas prepravy</li>
+                    <li><span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> optimalizácia spotreby a nákladov</li>
+                    <li><span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> kompatibilita so strojmi aj ručným balením</li>
                 </ul>
                 <a href="baliace-materialy.html" class="btn-secondary">
                     Pozrieť baliace materiály
@@ -881,30 +754,12 @@
         <h2>Pre výrobu, sklady aj logistiku</h2>
         <p>Pomáhame firmám, ktoré balia denne — či už ide o výrobu, sklad, e-commerce alebo distribúciu.</p>
         <div class="pills">
-            <span class="pill">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 7v14M9 4l3-3 3 3M9 4v4M15 4v4M6 21V10h12v11"/></svg>
-                Výroba
-            </span>
-            <span class="pill">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg>
-                Sklady
-            </span>
-            <span class="pill">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                Logistika
-            </span>
-            <span class="pill">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                E-commerce
-            </span>
-            <span class="pill">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-                Distribúcia
-            </span>
-            <span class="pill">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                Priemysel
-            </span>
+            <span class="pill"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 7v14M9 4l3-3 3 3M9 4v4M15 4v4M6 21V10h12v11"/></svg> Výroba</span>
+            <span class="pill"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20"/></svg> Sklady</span>
+            <span class="pill"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Logistika</span>
+            <span class="pill"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> E-commerce</span>
+            <span class="pill"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Distribúcia</span>
+            <span class="pill"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Priemysel</span>
         </div>
     </div>
 </section>
@@ -915,34 +770,10 @@
         <div class="process-section">
             <h2>Jednoduchý postup<br>spolupráce</h2>
             <div class="steps">
-                <div class="step">
-                    <span class="step-number">01.</span>
-                    <div>
-                        <h4>Úvodná konzultácia</h4>
-                        <p>Zistíme, čo balíte, v akých objemoch a kde je aktuálny problém.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <span class="step-number">02.</span>
-                    <div>
-                        <h4>Návrh riešenia</h4>
-                        <p>Navrhneme kombináciu systému a materiálu, ktorá dáva zmysel.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <span class="step-number">03.</span>
-                    <div>
-                        <h4>Dodávka a nastavenie</h4>
-                        <p>Inštalácia, spustenie a kompletné zaškolenie obsluhy.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <span class="step-number">04.</span>
-                    <div>
-                        <h4>Dlhodobá prevádzka</h4>
-                        <p>Servis, podpora a pravidelné dodávky baliacich materiálov.</p>
-                    </div>
-                </div>
+                <div class="step"><span class="step-number">01.</span><div><h4>Úvodná konzultácia</h4><p>Zistíme, čo balíte, v akých objemoch a kde je aktuálny problém.</p></div></div>
+                <div class="step"><span class="step-number">02.</span><div><h4>Návrh riešenia</h4><p>Navrhneme kombináciu systému a materiálu, ktorá dáva zmysel.</p></div></div>
+                <div class="step"><span class="step-number">03.</span><div><h4>Dodávka a nastavenie</h4><p>Inštalácia, spustenie a kompletné zaškolenie obsluhy.</p></div></div>
+                <div class="step"><span class="step-number">04.</span><div><h4>Dlhodobá prevádzka</h4><p>Servis, podpora a pravidelné dodávky baliacich materiálov.</p></div></div>
             </div>
         </div>
     </div>
@@ -952,45 +783,21 @@
 <section class="section-bg">
     <div class="section faq-section">
         <h2>Čo našich klientov najčastejšie zaujíma?</h2>
-
         <div class="faq-item open">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                Ako zistím, ktorý baliaci systém je pre nás vhodný?
-                <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-            <div class="faq-answer">
-                <div class="faq-answer-inner">Stačí nám poslať typ tovaru, objemy a aktuálny spôsob balenia. Navrhneme riešenie na mieru.</div>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)">Ako zistím, ktorý baliaci systém je pre nás vhodný?<svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            <div class="faq-answer"><div class="faq-answer-inner">Stačí nám poslať typ tovaru, objemy a aktuálny spôsob balenia. Navrhneme riešenie na mieru.</div></div>
         </div>
-
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                Dodávate aj servis a náhradné diely?
-                <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-            <div class="faq-answer">
-                <div class="faq-answer-inner">Áno. Zabezpečujeme servis, podporu aj pravidelné dodávky materiálu.</div>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)">Dodávate aj servis a náhradné diely?<svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            <div class="faq-answer"><div class="faq-answer-inner">Áno. Zabezpečujeme servis, podporu aj pravidelné dodávky materiálu.</div></div>
         </div>
-
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                Vieme kombinovať systém aj materiál od jedného dodávateľa?
-                <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-            <div class="faq-answer">
-                <div class="faq-answer-inner">Áno. Navrhujeme riešenia tak, aby systém aj materiál fungovali spolu efektívne.</div>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)">Vieme kombinovať systém aj materiál od jedného dodávateľa?<svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            <div class="faq-answer"><div class="faq-answer-inner">Áno. Navrhujeme riešenia tak, aby systém aj materiál fungovali spolu efektívne.</div></div>
         </div>
-
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                Je dopyt nezáväzný?
-                <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-            <div class="faq-answer">
-                <div class="faq-answer-inner">Áno. Konzultácia aj návrh riešenia sú nezáväzné.</div>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)">Je dopyt nezáväzný?<svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            <div class="faq-answer"><div class="faq-answer-inner">Áno. Konzultácia aj návrh riešenia sú nezáväzné.</div></div>
         </div>
     </div>
 </section>
@@ -1014,29 +821,21 @@
             <div class="accent-bar"></div>
             <h2>Povedzte nám,<br>čo balíte.</h2>
             <p>Napíšte nám typ tovaru, objemy a spôsob balenia. Ozveme sa s odporúčaním a cenovou ponukou do 24 hodín.</p>
-
             <div class="contact-info">
                 <div class="contact-info-item">
-                    <span class="contact-info-icon">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    </span>
+                    <span class="contact-info-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
                     info@quatropack.sk
                 </div>
                 <div class="contact-info-item">
-                    <span class="contact-info-icon">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    </span>
+                    <span class="contact-info-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
                     +421 900 000 000
                 </div>
                 <div class="contact-info-item">
-                    <span class="contact-info-icon">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    </span>
+                    <span class="contact-info-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
                     Slovenská republika
                 </div>
             </div>
         </div>
-
         <form class="contact-form" id="contactForm" novalidate>
             <div class="form-row">
                 <div class="form-group" data-field="name">
@@ -1085,9 +884,7 @@
     <div class="footer-left">
         <a href="#" class="footer-logo">
             <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-                <defs>
-                    <clipPath id="sq-ft"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath>
-                </defs>
+                <defs><clipPath id="sq-ft"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath></defs>
                 <g clip-path="url(#sq-ft)"><rect width="120" height="120" fill="rgba(255,255,255,0.15)"/></g>
                 <circle cx="55" cy="52" r="23" stroke="rgba(255,255,255,0.6)" stroke-width="7.5" fill="none" stroke-linecap="round"/>
                 <line x1="69" y1="66" x2="90" y2="90" stroke="rgba(255,255,255,0.6)" stroke-width="7.5" stroke-linecap="round"/>
@@ -1095,7 +892,7 @@
             Quatropack
         </a>
         <span class="footer-divider"></span>
-        <a href="https://maps.google.com/?q=Šamorínska+4152,+903+01+Senec">
+        <a href="https://maps.google.com/?q=%C5%A0amor%C3%ADnska+4152,+903+01+Senec">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Šamorínska 4152, 903 01 Senec
         </a>
@@ -1117,108 +914,56 @@
 </footer>
 
 <script>
-    // ===== FORM VALIDATION =====
-    (function() {
-        const form = document.getElementById('contactForm');
-        if (!form) return;
-
-        const rules = {
-            name:    { required: true },
-            contact: { required: true },
-            message: { required: true }
-        };
-
-        function clearError(group) {
-            group.classList.remove('has-error');
-        }
-
-        function showError(group) {
-            group.classList.add('has-error');
-        }
-
-        // Clear error on typing
-        form.querySelectorAll('input, textarea').forEach(function(el) {
-            el.addEventListener('input', function() {
-                clearError(el.closest('.form-group'));
-            });
+// ===== FORM VALIDATION =====
+(function() {
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const rules = { name: { required: true }, contact: { required: true }, message: { required: true } };
+    function clearError(group) { group.classList.remove('has-error'); }
+    function showError(group) { group.classList.add('has-error'); }
+    form.querySelectorAll('input, textarea').forEach(function(el) {
+        el.addEventListener('input', function() { clearError(el.closest('.form-group')); });
+    });
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var hasError = false, firstError = null;
+        Object.keys(rules).forEach(function(field) {
+            var group = form.querySelector('[data-field="' + field + '"]');
+            if (!group) return;
+            var input = group.querySelector('input, textarea');
+            if (!input) return;
+            clearError(group);
+            if (rules[field].required && !input.value.trim()) { showError(group); hasError = true; if (!firstError) firstError = input; }
         });
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var hasError = false;
-            var firstError = null;
-
-            Object.keys(rules).forEach(function(field) {
-                var group = form.querySelector('[data-field="' + field + '"]');
-                if (!group) return;
-                var input = group.querySelector('input, textarea');
-                if (!input) return;
-
-                clearError(group);
-
-                if (rules[field].required && !input.value.trim()) {
-                    showError(group);
-                    hasError = true;
-                    if (!firstError) firstError = input;
-                }
-            });
-
-            if (hasError && firstError) {
-                firstError.focus();
-                return;
-            }
-
-            // All good — show success
-            var btn = form.querySelector('.btn-accent');
-            var origHTML = btn.innerHTML;
-            btn.innerHTML = 'Ďakujeme! Ozveme sa čoskoro.';
-            btn.style.background = 'rgba(212,255,0,0.15)';
-            btn.style.color = 'var(--accent)';
-            btn.style.pointerEvents = 'none';
-            form.reset();
-
-            setTimeout(function() {
-                btn.innerHTML = origHTML;
-                btn.style.background = '';
-                btn.style.color = '';
-                btn.style.pointerEvents = '';
-            }, 4000);
-        });
-    })();
-
-    function toggleFaq(el) {
-        const item = el.parentElement;
-        const wasOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-        if (!wasOpen) item.classList.add('open');
+        if (hasError && firstError) { firstError.focus(); return; }
+        var btn = form.querySelector('.btn-accent');
+        var origHTML = btn.innerHTML;
+        btn.innerHTML = 'Ďakujeme! Ozveme sa čoskoro.';
+        btn.style.background = 'rgba(212,255,0,0.15)';
+        btn.style.color = 'var(--accent)';
+        btn.style.pointerEvents = 'none';
+        form.reset();
+        setTimeout(function() { btn.innerHTML = origHTML; btn.style.background = ''; btn.style.color = ''; btn.style.pointerEvents = ''; }, 4000);
+    });
+})();
+function toggleFaq(el) {
+    const item = el.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+}
+(function() {
+    const sections = document.querySelectorAll('[id]');
+    const navLinks = document.querySelectorAll('.navbar-links a:not(.navbar-cta)');
+    function updateActive() {
+        let current = '';
+        const offset = 120;
+        sections.forEach(section => { const top = section.offsetTop - offset; if (window.scrollY >= top) { current = section.getAttribute('id'); } });
+        navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === '#' + current) { link.classList.add('active'); } });
     }
-
-    // Scroll-spy: highlight active nav link based on visible section
-    (function() {
-        const sections = document.querySelectorAll('[id]');
-        const navLinks = document.querySelectorAll('.navbar-links a:not(.navbar-cta)');
-
-        function updateActive() {
-            let current = '';
-            const offset = 120;
-            sections.forEach(section => {
-                const top = section.offsetTop - offset;
-                if (window.scrollY >= top) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActive, { passive: true });
-        updateActive();
-    })();
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+})();
 </script>
 
 </body>
