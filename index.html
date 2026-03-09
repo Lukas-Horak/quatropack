@@ -451,12 +451,10 @@
       .logo-strip-logos {
         justify-content: flex-start;
         gap: 36px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+        overflow: hidden;
         padding: 0 24px;
+        will-change: transform;
       }
-      .logo-strip-logos::-webkit-scrollbar { display: none; }
       .logo-strip-logos img { height: 26px; }
     }
   </style>
@@ -786,6 +784,31 @@
       }
       window.addEventListener('scroll', updateActive, { passive: true });
       updateActive();
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const strip = document.querySelector('.logo-strip-logos');
+      if (!strip) return;
+      const section = document.querySelector('.logo-strip');
+
+      function onScroll() {
+        if (window.innerWidth > 768) { strip.style.transform = ''; return; }
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // how far the section is through the viewport (0 = just entering, 1 = leaving)
+        const progress = 1 - (rect.bottom / (vh + rect.height));
+        const clamped = Math.max(0, Math.min(1, progress));
+        // total scrollable width of logos beyond viewport
+        const maxShift = strip.scrollWidth - strip.parentElement.clientWidth;
+        const shift = clamped * maxShift;
+        strip.style.transform = 'translateX(' + (-shift) + 'px)';
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      onScroll();
     })();
   </script>
 
