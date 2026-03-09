@@ -137,10 +137,10 @@
     }
     .logo-strip-logos {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 32px; flex-wrap: wrap;
+      gap: 40px;
     }
     .logo-strip-logos img {
-      height: 30px; width: auto;
+      height: 30px; width: auto; flex-shrink: 0;
       object-fit: contain;
       filter: grayscale(100%) opacity(0.3);
       transition: filter 0.4s ease;
@@ -446,6 +446,18 @@
       .footer { flex-direction: column; gap: 16px; text-align: center; }
       .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
       .cta-banner { padding: 48px 24px; margin: 0 24px 48px; }
+      .logo-strip { padding: 40px 0; overflow: hidden; }
+      .logo-strip p { padding: 0 24px; }
+      .logo-strip-logos {
+        justify-content: flex-start;
+        gap: 36px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0 24px;
+      }
+      .logo-strip-logos::-webkit-scrollbar { display: none; }
+      .logo-strip-logos img { height: 26px; }
     }
   </style>
 </head>
