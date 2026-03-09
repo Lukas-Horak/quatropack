@@ -77,6 +77,7 @@
       transition: all 0.2s;
     }
     .lang-switch:hover { color: var(--text-primary); border-color: var(--text-primary); }
+    .navbar-right { display: flex; align-items: center; gap: 12px; }
     .navbar-cta {
       background: #000; color: #fff;
       padding: 10px 24px; border-radius: 100px;
@@ -376,13 +377,15 @@
       <span>Quatropack</span>
     </a>
     <ul class="navbar-links">
-      <li><a href="en/index.html">Home</a></li>
-      <li><a href="en/packaging-materials.html" class="active">Packaging Materials</a></li>
-      <li><a href="en/packaging-systems.html">Packaging Systems</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="packaging-materials.html" class="active">Packaging materials</a></li>
+      <li><a href="packaging-systems.html">Packaging systems</a></li>
       <li><a href="#">Eshop</a></li>
     </ul>
-    <a href="../baliace-materialy.html" class="lang-switch">SK</a>
-    <a href="en/index.html#contact" class="navbar-cta">Contact us</a>
+    <div class="navbar-right">
+      <a href="../baliace-materialy.html" class="lang-switch">SK</a>
+      <a href="index.html#contact" class="navbar-cta">Contact us</a>
+    </div>
   </nav>
 
   <!-- HERO SECTION -->
