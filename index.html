@@ -76,6 +76,14 @@
       transition: background 0.25s ease, color 0.25s ease;
     }
     .navbar-cta:hover { background: var(--accent); color: #000; }
+    .lang-switch {
+      font-size: 13px; font-weight: 600; color: var(--text-muted);
+      text-decoration: none; padding: 6px 12px;
+      border: 1px solid var(--border-light); border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .lang-switch:hover { color: var(--text-primary); border-color: var(--text-primary); }
+    .navbar-right { display: flex; align-items: center; gap: 12px; }
 
     /* ===== HERO ===== */
     .hero {
@@ -140,13 +148,19 @@
       gap: 40px;
     }
     .logo-strip-logos img {
-      height: 30px; width: auto; flex-shrink: 0;
+      height: 30px; max-width: 140px; flex-shrink: 0;
       object-fit: contain;
       filter: grayscale(100%) opacity(0.3);
       transition: filter 0.4s ease;
     }
     .logo-strip-logos img:hover {
       filter: grayscale(0%) opacity(1);
+    }
+    .logo-strip-logos.brands img {
+      filter: grayscale(0%) opacity(1);
+    }
+    .logo-strip-logos.brands img:hover {
+      filter: grayscale(100%) opacity(0.3);
     }
 
     /* ===== SECTIONS ===== */
@@ -450,12 +464,13 @@
       .logo-strip p { padding: 0 24px; }
       .logo-strip-logos {
         justify-content: flex-start;
-        gap: 36px;
-        overflow: hidden;
+        gap: 32px;
+        overflow: visible;
         padding: 0 24px;
         will-change: transform;
+        transition: transform 0.1s linear;
       }
-      .logo-strip-logos img { height: 26px; }
+      .logo-strip-logos img { height: 24px; max-width: 100px; }
     }
   </style>
 </head>
@@ -483,7 +498,10 @@
       <li><a href="baliace-systemy.html">Baliace systémy</a></li>
       <li><a href="#">Eshop</a></li>
     </ul>
-    <a href="#kontakt" class="navbar-cta">Kontaktujte nás</a>
+    <div class="navbar-right">
+      <a href="en/index.html" class="lang-switch">EN</a>
+      <a href="#kontakt" class="navbar-cta">Kontaktujte nás</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -501,16 +519,15 @@
   <!-- HERO IMAGE -->
   <div class="hero-image"></div>
 
-  <!-- LOGO STRIP -->
+  <!-- BRANDS STRIP -->
   <div class="logo-strip">
-    <p>Dôverujú nám</p>
-    <div class="logo-strip-logos">
-      <img src="eset.svg" alt="ESET">
-      <img src="skoda.svg" alt="ŠKODA">
-      <img src="ikea.svg" alt="IKEA">
-      <img src="hyundai.svg" alt="HYUNDAI">
-      <img src="samsung.svg" alt="SAMSUNG">
-      <img src="olympus.svg" alt="OLYMPUS">
+    <p>Nakupujte podľa značiek</p>
+    <div class="logo-strip-logos brands">
+      <img src="centropen.svg" alt="Centropen">
+      <img src="esselte.svg" alt="Esselte">
+      <img src="pilot.svg" alt="Pilot">
+      <img src="hp.svg" alt="Hewlett Packard">
+      <img src="stabilo.svg" alt="Stabilo">
     </div>
   </div>
 
@@ -610,6 +627,19 @@
       </div>
     </div>
   </section>
+
+  <!-- CLIENT LOGOS -->
+  <div class="logo-strip" style="padding-top: 0;">
+    <p>Dôverujú nám</p>
+    <div class="logo-strip-logos">
+      <img src="eset.svg" alt="ESET">
+      <img src="skoda.svg" alt="ŠKODA">
+      <img src="ikea.svg" alt="IKEA">
+      <img src="hyundai.svg" alt="HYUNDAI">
+      <img src="samsung.svg" alt="SAMSUNG">
+      <img src="olympus.svg" alt="OLYMPUS">
+    </div>
+  </div>
 
   <!-- CTA BANNER -->
   <section class="section-bg" style="padding-bottom: 100px; padding-top: 0;">
@@ -789,24 +819,26 @@
 
   <script>
     (function(){
-      const strip = document.querySelector('.logo-strip-logos');
-      if (!strip) return;
-      const section = document.querySelector('.logo-strip');
+      var strips = document.querySelectorAll('.logo-strip');
+      if (!strips.length) return;
 
       function onScroll() {
-        if (window.innerWidth > 768) { strip.style.transform = ''; return; }
-        const rect = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        // only start when section is visible on screen
-        if (rect.bottom < 0 || rect.top > vh) return;
-        // progress: 0 = section just entered viewport bottom, 1 = section leaving viewport top
-        const visibleStart = vh; // rect.top == vh means just entering
-        const visibleEnd = -rect.height; // rect.top == -height means fully left
-        const progress = (visibleStart - rect.top) / (visibleStart - visibleEnd);
-        const clamped = Math.max(0, Math.min(1, progress));
-        const maxShift = strip.scrollWidth - strip.parentElement.clientWidth;
-        const shift = clamped * maxShift;
-        strip.style.transform = 'translateX(' + (-shift) + 'px)';
+        if (window.innerWidth > 768) {
+          strips.forEach(function(s) { s.querySelector('.logo-strip-logos').style.transform = ''; });
+          return;
+        }
+        var vh = window.innerHeight;
+        strips.forEach(function(section) {
+          var logos = section.querySelector('.logo-strip-logos');
+          var rect = section.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > vh * 0.7) return;
+          var startPoint = vh * 0.7;
+          var endPoint = -rect.height;
+          var progress = (startPoint - rect.top) / (startPoint - endPoint);
+          var clamped = Math.max(0, Math.min(1, progress));
+          var maxShift = Math.max(0, logos.scrollWidth - section.clientWidth);
+          logos.style.transform = 'translateX(' + (-clamped * maxShift) + 'px)';
+        });
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
