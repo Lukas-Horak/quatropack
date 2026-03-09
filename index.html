@@ -797,10 +797,13 @@
         if (window.innerWidth > 768) { strip.style.transform = ''; return; }
         const rect = section.getBoundingClientRect();
         const vh = window.innerHeight;
-        // how far the section is through the viewport (0 = just entering, 1 = leaving)
-        const progress = 1 - (rect.bottom / (vh + rect.height));
+        // only start when section is visible on screen
+        if (rect.bottom < 0 || rect.top > vh) return;
+        // progress: 0 = section just entered viewport bottom, 1 = section leaving viewport top
+        const visibleStart = vh; // rect.top == vh means just entering
+        const visibleEnd = -rect.height; // rect.top == -height means fully left
+        const progress = (visibleStart - rect.top) / (visibleStart - visibleEnd);
         const clamped = Math.max(0, Math.min(1, progress));
-        // total scrollable width of logos beyond viewport
         const maxShift = strip.scrollWidth - strip.parentElement.clientWidth;
         const shift = clamped * maxShift;
         strip.style.transform = 'translateX(' + (-shift) + 'px)';
@@ -808,7 +811,6 @@
 
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll);
-      onScroll();
     })();
   </script>
 
