@@ -142,8 +142,12 @@
       text-align: center;
     }
     .logo-strip p {
-      font-size: 13px; font-weight: 500; text-transform: uppercase;
-      letter-spacing: 1.5px; color: var(--text-muted);
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-white); border: 1px solid var(--border-light);
+      border-radius: 100px; padding: 10px 22px;
+      font-size: 14px; font-weight: 400; color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      letter-spacing: 0.2px;
       margin-bottom: 32px;
     }
     .logo-strip-logos {
@@ -158,6 +162,12 @@
     }
     .logo-strip-logos img:hover {
       filter: grayscale(0%) opacity(1);
+    }
+    .logo-strip-logos.brands img {
+      filter: grayscale(0%) opacity(1);
+    }
+    .logo-strip-logos.brands img:hover {
+      filter: grayscale(100%) opacity(0.3);
     }
 
     /* ===== SECTIONS ===== */
@@ -458,7 +468,7 @@
       .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
       .cta-banner { padding: 48px 24px; margin: 0 24px 48px; }
       .logo-strip { padding: 40px 0; overflow: hidden; }
-      .logo-strip p { padding: 0 24px; }
+      .logo-strip p { margin-left: 24px; }
       .logo-strip-logos {
         justify-content: flex-start;
         gap: 32px;
@@ -516,16 +526,15 @@
   <!-- HERO IMAGE -->
   <div class="hero-image"></div>
 
-  <!-- LOGO STRIP -->
+  <!-- BRANDS STRIP -->
   <div class="logo-strip">
-    <p>Trusted by</p>
-    <div class="logo-strip-logos">
-      <img src="../eset.svg" alt="ESET">
-      <img src="../skoda.svg" alt="ŠKODA">
-      <img src="../ikea.svg" alt="IKEA">
-      <img src="../hyundai.svg" alt="HYUNDAI">
-      <img src="../samsung.svg" alt="SAMSUNG">
-      <img src="../olympus.svg" alt="OLYMPUS">
+    <p>Shop by brands</p>
+    <div class="logo-strip-logos brands">
+      <img src="../centropen.svg" alt="Centropen">
+      <img src="../esselte.svg" alt="Esselte">
+      <img src="../pilot.svg" alt="Pilot">
+      <img src="../hp.svg" alt="Hewlett Packard">
+      <img src="../stabilo.svg" alt="Stabilo">
     </div>
   </div>
 
@@ -622,6 +631,21 @@
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">Is the inquiry non-binding?<svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         <div class="faq-answer"><div class="faq-answer-inner">Yes. Consultation and solution design are non-binding.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT LOGOS -->
+  <section class="section-bg">
+    <div class="logo-strip" style="padding: 40px 48px 100px;">
+      <p>Trusted by</p>
+      <div class="logo-strip-logos">
+        <img src="../eset.svg" alt="ESET">
+        <img src="../skoda.svg" alt="ŠKODA">
+        <img src="../ikea.svg" alt="IKEA">
+        <img src="../hyundai.svg" alt="HYUNDAI">
+        <img src="../samsung.svg" alt="SAMSUNG">
+        <img src="../olympus.svg" alt="OLYMPUS">
       </div>
     </div>
   </section>
