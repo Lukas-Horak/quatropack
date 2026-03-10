@@ -101,6 +101,19 @@
     .lang-switch:hover { color: var(--text-primary); border-color: var(--text-primary); }
     .navbar-right { display: flex; align-items: center; gap: 12px; }
 
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 8px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px; background: var(--text-primary);
+      border-radius: 2px; transition: all 0.3s ease;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
     /* BUTTONS */
     .btn-primary {
       display: inline-flex; align-items: center; gap: 12px;
@@ -402,6 +415,22 @@
     }
     @media (max-width: 768px) {
       .navbar-links { display: none; }
+      .navbar-logo svg { width: 32px; height: 32px; }
+      .navbar-logo span { font-size: 20px; letter-spacing: 1px; }
+      .hamburger { display: flex; }
+      .navbar-links.mobile-open {
+        display: flex; flex-direction: column;
+        position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+        padding: 32px 24px; gap: 8px; z-index: 999;
+        transform: none;
+      }
+      .navbar-links.mobile-open a {
+        font-size: 18px; padding: 16px 20px; width: 100%;
+        border-radius: 12px;
+      }
+      .navbar-links.mobile-open a:hover { background: rgba(212,255,0,0.15); }
+      .scroll-top { bottom: 24px; right: 24px; width: 44px; height: 44px; }
       .hero h1 { font-size: 36px; letter-spacing: -0.8px; }
       .hero { padding: 48px 20px 40px; }
       .hero p { font-size: 16px; }
@@ -419,6 +448,8 @@
       .how-to-subtitle { padding: 0 12px; font-size: 14px; }
       .delivery-subtitle { font-size: 16px; }
       .form-row { grid-template-columns: 1fr; }
+      .form-footer { flex-direction: column; align-items: stretch; }
+      .btn-accent { justify-content: center; white-space: nowrap; }
       .footer { flex-direction: column; gap: 16px; text-align: center; }
       .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
     }
@@ -434,7 +465,7 @@
     }
     .scroll-top.visible { opacity: 1; visibility: visible; }
     .scroll-top:hover { transform: translateY(-3px); }
-    .scroll-top svg { width: 20px; height: 20px; }
+    .scroll-top svg { width: 20px; height: 20px; color: #000; }
   </style>
 </head>
 <body>
@@ -464,6 +495,9 @@
     <div class="navbar-right">
       <a href="en/packaging-materials.html" class="lang-switch">EN</a>
       <a href="#kontakt" class="navbar-cta">Kontakt</a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.navbar-links').classList.toggle('mobile-open');">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -870,6 +904,15 @@
 
     // Page fade-in
     document.body.classList.add('loaded');
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.navbar-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var hamburger = document.querySelector('.hamburger');
+        if (hamburger) hamburger.classList.remove('active');
+        document.querySelector('.navbar-links').classList.remove('mobile-open');
+      });
+    });
   </script>
 
 </body>
