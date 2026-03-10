@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuatroPack V2</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Quatropack — Komplexné riešenia balenia</title>
+  <meta property="og:title" content="Quatropack — Komplexné riešenia balenia">
+  <meta property="og:description" content="Komplexné riešenia balenia pre firmy. Navrhneme a dodáme baliace systémy a rovnako vám zabezpečíme aj baliace materiály.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quatropack.sk">
+  <meta property="og:locale" content="sk_SK">
   <meta name="description" content="Komplexné riešenia balenia pre firmy. Navrhneme a dodáme baliace systémy a rovnako vám zabezpečíme aj baliace materiály.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,41 +39,49 @@
       background: var(--bg-white);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      opacity: 0;
     }
+
+    body.loaded { opacity: 1; transition: opacity 0.4s ease; }
 
     /* ===== NAVBAR ===== */
     .navbar {
-      position: sticky; top: 0; z-index: 100;
+      position: sticky; top: 0; z-index: 1000;
       background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-light);
       padding: 0 48px; height: 64px;
       display: flex; align-items: center; justify-content: space-between;
+      transition: box-shadow 0.3s ease;
     }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
     .navbar-logo {
       display: flex; align-items: center; gap: 10px;
       text-decoration: none; color: var(--text-primary);
     }
-    .navbar-logo svg { width: 36px; height: 36px; }
+    .navbar-logo svg { width: 40px; height: 40px; }
     .navbar-logo span {
       font-family: var(--font-heading);
-      font-size: 18px; font-weight: 500; letter-spacing: -0.3px;
+      font-size: 26px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
     }
     .navbar-links {
       display: flex; align-items: center; gap: 8px; list-style: none;
       position: absolute; left: 50%; transform: translateX(-50%);
     }
     .navbar-links a {
-      text-decoration: none; color: var(--text-secondary);
-      font-size: 14px; font-weight: 500;
-      padding: 8px 16px; border-radius: 16px;
-      transition: color 0.2s, background 0.2s;
+      text-decoration: none; color: var(--text-muted);
+      font-size: 14px; font-weight: 400; letter-spacing: 0.01em;
+      padding: 8px 16px; border-radius: 100px;
+      transition: color 0.3s, background 0.3s;
+      position: relative;
     }
-    .navbar-links a:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
-    .navbar-links a.active { color: #000; font-weight: 600; position: relative; }
-    .navbar-links a.active::after {
-      content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
-      width: 20px; height: 2.5px; background: #000; border-radius: 2px;
+    .navbar-links a:hover { color: var(--text-primary); background: rgba(212,255,0,0.15); }
+    .navbar-links a.active { color: var(--text-primary); font-weight: 600; background: rgba(212,255,0,0.18); }
+    .navbar-links a.coming-soon { pointer-events: none; opacity: 0.5; }
+    .coming-soon-badge {
+      font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      background: var(--accent); color: var(--text-primary); padding: 2px 6px;
+      border-radius: 4px; margin-left: 6px; vertical-align: middle;
     }
     .navbar-cta {
       background: #000; color: #fff;
@@ -84,6 +98,22 @@
     }
     .lang-switch:hover { color: var(--text-primary); border-color: var(--text-primary); }
     .navbar-right { display: flex; align-items: center; gap: 12px; }
+
+    /* ===== FADE-IN ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.25s; }
+    .fade-in-delay-3 { transition-delay: 0.4s; }
+    .fade-in-delay-4 { transition-delay: 0.55s; }
+    .word-reveal .word {
+      display: inline-block; opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .word-reveal.visible .word { opacity: 1; transform: translateY(0); }
 
     /* ===== HERO ===== */
     .hero {
@@ -162,9 +192,6 @@
     }
     .logo-strip-logos.brands img {
       filter: grayscale(0%) opacity(1);
-    }
-    .logo-strip-logos.brands img:hover {
-      filter: grayscale(100%) opacity(0.3);
     }
 
     /* ===== SECTIONS ===== */
@@ -476,6 +503,19 @@
       }
       .logo-strip-logos img { height: 24px; max-width: 100px; }
     }
+
+    .scroll-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+    .scroll-top:hover { transform: translateY(-3px); }
+    .scroll-top svg { width: 20px; height: 20px; }
   </style>
 </head>
 <body>
@@ -500,7 +540,7 @@
       <li><a href="#uvod" class="active">Úvod</a></li>
       <li><a href="baliace-materialy.html">Baliace materiály</a></li>
       <li><a href="baliace-systemy.html">Baliace systémy</a></li>
-      <li><a href="#">Eshop</a></li>
+      <li><a href="#" class="coming-soon">Eshop <span class="coming-soon-badge">čoskoro</span></a></li>
     </ul>
     <div class="navbar-right">
       <a href="en/index.html" class="lang-switch">EN</a>
@@ -510,8 +550,8 @@
 
   <!-- HERO -->
   <section class="hero" id="uvod">
-    <h1>Komplexné riešenia balenia pre&nbsp;firmy.</h1>
-    <p>Navrhneme a dodáme baliace systémy a rovnako vám zabezpečíme aj baliace materiály. Rýchlejšie balenie, stabilnejšie zásielky, menej reklamácií.</p>
+    <h1 class="fade-in">Komplexné riešenia balenia pre&nbsp;firmy.</h1>
+    <p class="fade-in fade-in-delay-1">Navrhneme a dodáme baliace systémy a rovnako vám zabezpečíme aj baliace materiály. Rýchlejšie balenie, stabilnejšie zásielky, menej reklamácií.</p>
     <a href="#riesenia" class="btn-primary">
       Ako vám môžeme pomôcť
       <span class="arrow">
@@ -527,18 +567,20 @@
   <div class="logo-strip">
     <p>Nakupujte podľa značiek</p>
     <div class="logo-strip-logos brands">
-      <img src="centropen.svg" alt="Centropen">
-      <img src="esselte.svg" alt="Esselte">
-      <img src="pilot.svg" alt="Pilot">
-      <img src="hp.svg" alt="Hewlett Packard">
-      <img src="stabilo.svg" alt="Stabilo">
+      <img src="tesa.svg" alt="Tesa">
+      <img src="3m.svg" alt="3M">
+      <img src="lohmann.svg" alt="Lohmann">
+      <img src="monta.svg" alt="Monta">
+      <img src="hibond.svg" alt="Hi-Bond">
+      <img src="soco.svg" alt="Soco">
+      <img src="mosca.svg" alt="Mosca">
     </div>
   </div>
 
   <!-- SOLUTIONS -->
   <section class="section-bg" id="riesenia">
     <div class="section">
-      <h2>Naše riešenia</h2>
+      <h2 class="fade-in">Naše riešenia</h2>
       <div class="solutions-grid">
         <!-- Card 1 -->
         <div class="solution-card">
@@ -581,7 +623,7 @@
   <!-- INDUSTRIES -->
   <section class="section-bg" id="materialy">
     <div class="section industry-section">
-      <h2>Pre výrobu, sklady aj logistiku</h2>
+      <h2 class="fade-in">Pre výrobu, sklady aj logistiku</h2>
       <p>Pomáhame firmám, ktoré balia denne — či už ide o výrobu, sklad, e-commerce alebo distribúciu.</p>
       <div class="pills">
         <span class="pill"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 7v14M9 4l3-3 3 3M9 4v4M15 4v4M6 21V10h12v11"/></svg> Výroba</span>
@@ -598,7 +640,7 @@
   <section class="section-bg" style="background: rgba(245,245,245,0.5);">
     <div class="section">
       <div class="process-section">
-        <h2>Jednoduchý postup<br>spolupráce</h2>
+        <h2 class="fade-in">Jednoduchý postup<br>spolupráce</h2>
         <div class="steps">
           <div class="step"><span class="step-number">01.</span><div><h4>Úvodná konzultácia</h4><p>Zistíme, čo balíte, v akých objemoch a kde je aktuálny problém.</p></div></div>
           <div class="step"><span class="step-number">02.</span><div><h4>Návrh riešenia</h4><p>Navrhneme kombináciu systému a materiálu, ktorá dáva zmysel.</p></div></div>
@@ -612,7 +654,7 @@
   <!-- FAQ -->
   <section class="section-bg">
     <div class="section faq-section">
-      <h2>Čo našich klientov najčastejšie zaujíma?</h2>
+      <h2 class="fade-in">Čo našich klientov najčastejšie zaujíma?</h2>
       <div class="faq-item open">
         <div class="faq-question" onclick="toggleFaq(this)">Ako zistím, ktorý baliaci systém je pre nás vhodný?<svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
         <div class="faq-answer"><div class="faq-answer-inner">Stačí nám poslať typ tovaru, objemy a aktuálny spôsob balenia. Navrhneme riešenie na mieru.</div></div>
@@ -634,8 +676,8 @@
 
   <!-- CLIENT LOGOS -->
   <section class="section-bg">
-    <div class="logo-strip" style="padding: 40px 48px 100px;">
-      <p>Dôverujú nám</p>
+    <div class="logo-strip" style="padding: 20px 48px 100px;">
+      <p style="margin-bottom: 52px;">Overené firmami ako</p>
       <div class="logo-strip-logos">
         <img src="eset.svg" alt="ESET">
         <img src="skoda.svg" alt="ŠKODA">
@@ -650,7 +692,7 @@
   <!-- CTA BANNER -->
   <section class="section-bg" style="padding-bottom: 100px; padding-top: 0;">
     <div class="cta-banner">
-      <h2>Povedzte nám, čo balíte. Radi vám navrhneme riešenie.</h2>
+      <h2 class="fade-in">Povedzte nám, čo balíte. Radi vám navrhneme riešenie.</h2>
       <p>Napíšte nám typ tovaru, približné objemy a spôsob balenia. Ozveme sa s odporúčaním a cenovou ponukou.</p>
       <a href="#kontakt" class="btn-dark">
         Nezáväzný dopyt
@@ -664,7 +706,7 @@
     <div class="contact-inner">
       <div class="contact-left">
         <div class="accent-bar"></div>
-        <h2>Povedzte nám,<br>čo balíte.</h2>
+        <h2 class="fade-in">Povedzte nám,<br>čo balíte.</h2>
         <p>Napíšte nám typ tovaru, objemy a spôsob balenia. Ozveme sa s odporúčaním a cenovou ponukou do 24 hodín.</p>
         <div class="contact-info">
           <div class="contact-info-item">
@@ -725,6 +767,10 @@
     </div>
   </section>
 
+  <button class="scroll-top" aria-label="Späť hore" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>
+  </button>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-left">
@@ -757,7 +803,7 @@
       <a href="index.html">Úvod</a>
       <a href="baliace-materialy.html">Baliace materiály</a>
       <a href="baliace-systemy.html">Baliace systémy</a>
-      <a href="#">Eshop</a>
+      <a href="#" class="coming-soon">Eshop</a>
       <span>© 2026 Quatropack</span>
     </div>
   </footer>
@@ -850,6 +896,60 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll);
     })();
+  </script>
+
+  <script>
+    // ===== FADE-IN + WORD REVEAL ON SCROLL =====
+    (function() {
+      // Split headings into words
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        if (el.tagName === 'H1' || el.tagName === 'H2') {
+          el.classList.remove('fade-in');
+          el.classList.add('word-reveal');
+          var html = el.innerHTML;
+          // Handle <br> tags
+          var parts = html.split(/(<br\s*\/?>)/gi);
+          var wordIndex = 0;
+          el.innerHTML = parts.map(function(part) {
+            if (part.match(/^<br/i)) return part;
+            return part.split(/(\s+)/).map(function(token) {
+              if (!token.trim()) return token;
+              var span = '<span class="word" style="transition-delay:' + (wordIndex * 0.06) + 's">' + token + '</span>';
+              wordIndex++;
+              return span;
+            }).join('');
+          }).join('');
+        }
+      });
+
+      // Observe all animated elements
+      var els = document.querySelectorAll('.fade-in, .word-reveal');
+      if (!els.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // Sticky navbar shadow
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll to top button
+    const scrollBtn = document.querySelector('.scroll-top');
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 600);
+    });
+
+    // Page fade-in
+    document.body.classList.add('loaded');
   </script>
 
 </body>
