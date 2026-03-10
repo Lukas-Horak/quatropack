@@ -464,21 +464,99 @@
     }
     @media (max-width: 768px) {
       .navbar-links { display: none; }
+      .navbar-cta, .lang-switch { display: none; }
       .navbar-logo svg { width: 32px; height: 32px; }
       .navbar-logo span { font-size: 20px; letter-spacing: 1px; }
-      .hamburger { display: flex; }
+      .hamburger { display: flex; z-index: 1002; }
+      .hamburger.active span { background: #fff; }
+
+      /* Fullscreen menu overlay */
       .navbar-links.mobile-open {
         display: flex; flex-direction: column;
-        position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
-        background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
-        padding: 32px 24px; gap: 8px; z-index: 999;
+        align-items: center; justify-content: center;
+        position: fixed; inset: 0;
+        background: #000;
+        padding: 100px 40px 60px;
+        gap: 0; z-index: 1000;
         transform: none;
+        list-style: none;
       }
+      .navbar-links.mobile-open li { width: 100%; text-align: center; }
       .navbar-links.mobile-open a {
-        font-size: 18px; padding: 16px 20px; width: 100%;
-        border-radius: 12px;
+        font-size: 28px; font-weight: 400;
+        padding: 18px 0; width: 100%;
+        display: block;
+        border-radius: 0; color: rgba(255,255,255,0.45);
+        font-family: 'Space Grotesk', sans-serif;
+        transition: color 0.2s ease;
+        background: none; letter-spacing: 0.5px;
       }
-      .navbar-links.mobile-open a:hover { background: rgba(212,255,0,0.15); }
+      .navbar-links.mobile-open a:hover,
+      .navbar-links.mobile-open a.active {
+        color: #fff; background: none;
+      }
+      .navbar-links.mobile-open .coming-soon { opacity: 0.25; }
+      .navbar-links.mobile-open .coming-soon-badge {
+        background: rgba(212,255,0,0.15); color: #D4FF00; font-size: 8px;
+      }
+
+      /* Menu footer */
+      .mobile-menu-footer {
+        margin-top: auto; padding-top: 24px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        display: flex; flex-direction: column; gap: 0;
+        list-style: none; width: 100%; align-items: flex-start;
+      }
+      .mobile-menu-footer .navbar-cta {
+        display: none;
+      }
+      .mobile-menu-contact {
+        display: flex; flex-direction: column; gap: 8px;
+        padding: 16px 0; width: 100%;
+      }
+      .mobile-menu-contact a {
+        font-size: 14px !important; font-weight: 400 !important;
+        font-family: 'Inter', sans-serif !important;
+        color: rgba(255,255,255,0.4) !important;
+        text-decoration: none; padding: 4px 0 !important;
+        letter-spacing: 0 !important;
+      }
+      .mobile-menu-contact a:hover { color: rgba(255,255,255,0.7) !important; }
+      .mobile-menu-contact span.label { color: rgba(255,255,255,0.2); margin-right: 4px; }
+      .mobile-menu-footer .lang-switch {
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 12px 0;
+        font-size: 14px; text-decoration: none;
+        color: rgba(255,255,255,0.3);
+        font-family: 'Inter', sans-serif;
+      }
+      .mobile-menu-footer .lang-switch:hover { color: rgba(255,255,255,0.6); }
+      .lang-flag { font-size: 16px; }
+
+      /* Body state when menu open */
+      body.menu-open { overflow: hidden; }
+      body.menu-open .navbar {
+        position: fixed; top: 0; left: 0; right: 0;
+        background: transparent; border-bottom-color: transparent;
+        z-index: 1001;
+      }
+      body.menu-open .navbar-logo span { color: #fff; }
+
+      /* 3D page tilt */
+      .page-content {
+        transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1),
+                    border-radius 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+        transform-origin: center center;
+      }
+      body.menu-open .page-content {
+        transform: perspective(1200px) translateZ(-100px) rotateY(-8deg) translateX(15%);
+        border-radius: 16px;
+        overflow: hidden;
+        pointer-events: none;
+        box-shadow: -20px 0 60px rgba(0,0,0,0.5);
+      }
+      .menu-overlay { display: none; }
+
       .scroll-top { bottom: 24px; right: 24px; width: 44px; height: 44px; }
       .hero { padding: 48px 20px 40px; }
       .hero h1 { font-size: 36px; letter-spacing: -0.8px; }
@@ -520,15 +598,26 @@
       <li><a href="baliace-materialy.html">Baliace materiály</a></li>
       <li><a href="baliace-systemy.html" class="active">Baliace systémy</a></li>
       <li><a href="#" class="coming-soon">Eshop <span class="coming-soon-badge">čoskoro</span></a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+      <li class="mobile-menu-footer">
+        <div class="mobile-menu-contact">
+          <a href="tel:+421903757222"><span class="label">t:</span> +421 903 757 222</a>
+          <a href="mailto:info@quatropack.sk"><span class="label">m:</span> info@quatropack.sk</a>
+        </div>
+        <a href="en/packaging-systems.html" class="lang-switch"><span class="lang-flag">🇬🇧</span> English</a>
+      </li>
     </ul>
     <div class="navbar-right">
       <a href="en/packaging-systems.html" class="lang-switch">EN</a>
       <a href="#kontakt" class="navbar-cta">Kontakt</a>
-      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('active'); document.querySelector('.navbar-links').classList.toggle('mobile-open');">
+      <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
+
+  <div class="menu-overlay" onclick="toggleMobileMenu()"></div>
+  <div class="page-content">
 
   <!-- Hero Section -->
   <section class="hero">
@@ -917,17 +1006,26 @@
       statsObserver.observe(statsSection);
     }
 
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      document.querySelector('.hamburger').classList.toggle('active');
+      document.querySelector('.navbar-links').classList.toggle('mobile-open');
+      document.body.classList.toggle('menu-open');
+    }
+    window.toggleMobileMenu = toggleMobileMenu;
+
     // Close mobile menu on link click
     document.querySelectorAll('.navbar-links a').forEach(function(link) {
       link.addEventListener('click', function() {
         document.querySelector('.hamburger')?.classList.remove('active');
         document.querySelector('.navbar-links').classList.remove('mobile-open');
+        document.body.classList.remove('menu-open');
       });
     });
 
     // Page fade-in
     document.body.classList.add('loaded');
   </script>
-
+  </div><!-- /page-content -->
 </body>
 </html>
