@@ -502,6 +502,7 @@
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
     .mobile-menu-footer { display: none; }
+    .mobile-only { display: none; }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
@@ -520,6 +521,7 @@
       .navbar-logo span { font-size: 20px; letter-spacing: 1px; }
       .hamburger { display: flex; z-index: 1101; }
       .hamburger.active span { background: #fff; }
+      .mobile-only { display: list-item; }
 
       /* Fullscreen menu overlay */
       .navbar-links.mobile-open {
@@ -600,7 +602,7 @@
       body.menu-open .navbar {
         position: fixed; top: 0; left: 0; right: 0;
         background: transparent; border-bottom-color: transparent;
-        z-index: 1100;
+        z-index: 1100; backdrop-filter: none; -webkit-backdrop-filter: none;
       }
       body.menu-open .navbar-logo span { color: #fff; }
 
@@ -654,7 +656,7 @@
       <li><a href="packaging-materials.html">Packaging materials</a></li>
       <li><a href="packaging-systems.html">Packaging systems</a></li>
       <li><a href="#" class="coming-soon">Eshop <span class="coming-soon-badge">soon</span></a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li class="mobile-only"><a href="#contact">Contact</a></li>
       <li class="mobile-menu-footer">
         <div class="mobile-menu-contact">
           <a href="tel:+421903757222"><span class="label">t:</span> +421 903 757 222</a>
