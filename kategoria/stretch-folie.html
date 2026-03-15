@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <title>Stretch fólie | Quatropack</title>
+  <meta name="description" content="Stretch fólie pre stabilizáciu a ochranu paliet. Ručné aj strojné spracovanie. Quatropack — profesionálne baliace materiály.">
+  <meta property="og:title" content="Stretch fólie | Quatropack">
+  <meta property="og:description" content="Stretch fólie pre stabilizáciu a ochranu paliet. Ručné aj strojné spracovanie.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --text-primary: #2D2E3A;
+      --text-secondary: #6B6D85;
+      --text-muted: #8E90A6;
+      --accent: #D4FF00;
+      --bg-light: #F5F5F5;
+      --bg-white: #FFFFFF;
+      --bg-dark: #000000;
+      --border-light: rgba(0,0,0,0.06);
+      --border-dark: rgba(255,255,255,0.12);
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', -apple-system, system-ui, 'Segoe UI', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      background: var(--bg-white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      opacity: 0;
+    }
+    body.loaded { opacity: 1; transition: opacity 0.4s ease; }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0 48px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: box-shadow 0.3s ease;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+    .navbar-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text-primary);
+    }
+    .navbar-logo svg { width: 40px; height: 40px; }
+    .navbar-logo span {
+      font-family: var(--font-heading);
+      font-size: 26px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    }
+    .navbar-links {
+      display: flex; align-items: center; gap: 8px; list-style: none;
+      position: absolute; left: 50%; transform: translateX(-50%);
+    }
+    .navbar-links a {
+      text-decoration: none; color: var(--text-muted);
+      font-size: 14px; font-weight: 400; letter-spacing: 0.01em;
+      padding: 8px 16px; border-radius: 100px;
+      transition: color 0.3s, background 0.3s;
+    }
+    .navbar-links a:hover { color: var(--text-primary); background: rgba(212,255,0,0.15); }
+    .navbar-links a.active { color: var(--text-primary); font-weight: 600; background: rgba(212,255,0,0.18); }
+    .navbar-links a.coming-soon { pointer-events: none; opacity: 0.5; }
+    .coming-soon-badge {
+      font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+      background: var(--accent); color: var(--text-primary); padding: 2px 6px;
+      border-radius: 4px; margin-left: 6px; vertical-align: middle;
+    }
+    .navbar-cta {
+      background: #000; color: #fff;
+      padding: 10px 24px; border-radius: 100px;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .navbar-cta:hover { background: var(--accent); color: #000; }
+    .lang-switch {
+      font-size: 13px; font-weight: 600; color: var(--text-muted);
+      text-decoration: none; padding: 6px 12px;
+      border: 1px solid var(--border-light); border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .lang-switch:hover { color: var(--text-primary); border-color: var(--text-primary); }
+    .navbar-right { display: flex; align-items: center; gap: 12px; }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 8px;
+      z-index: 1101;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px; background: var(--text-primary);
+      border-radius: 2px; transition: all 0.3s ease;
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu-footer { display: none; }
+    .mobile-only { display: none; }
+
+    /* ===== HERO BANNER ===== */
+    .product-hero {
+      background: var(--bg-light);
+      padding: 80px 48px 60px;
+    }
+    .product-hero-inner {
+      max-width: 1300px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;
+    }
+    .product-hero-content {}
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: var(--text-muted); margin-bottom: 24px;
+    }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--text-primary); }
+    .breadcrumb span { color: var(--text-muted); }
+    .product-hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(40px, 5vw, 60px);
+      font-weight: 400; line-height: 1.1;
+      letter-spacing: -1.2px; color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .product-hero .subtitle {
+      font-size: 20px; color: var(--accent);
+      background: var(--bg-dark); display: inline-block;
+      padding: 6px 16px; border-radius: 100px;
+      font-weight: 500; margin-bottom: 24px;
+    }
+    .product-hero p {
+      font-size: 17px; color: var(--text-secondary);
+      line-height: 1.7; max-width: 480px;
+    }
+    .product-hero-image {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .product-hero-image svg {
+      width: 100%; max-width: 400px; height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+    }
+
+    /* ===== CONTENT SECTIONS ===== */
+    .content-section {
+      padding: 80px 48px;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .content-section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 400; letter-spacing: -0.8px;
+      color: var(--text-primary); margin-bottom: 24px;
+    }
+    .content-section p {
+      font-size: 16px; color: var(--text-secondary);
+      line-height: 1.8; margin-bottom: 20px;
+    }
+
+    /* ===== SUBCATEGORIES GRID ===== */
+    .subcategories {
+      padding: 60px 48px 80px;
+      background: var(--bg-light);
+    }
+    .subcategories-inner {
+      max-width: 1300px; margin: 0 auto;
+    }
+    .subcategories h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 400; letter-spacing: -0.8px;
+      color: var(--text-primary); margin-bottom: 48px;
+      text-align: center;
+    }
+    .subcat-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .subcat-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px; padding: 32px;
+      text-align: center;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .subcat-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      transform: translateY(-3px);
+    }
+    .subcat-icon {
+      width: 56px; height: 56px;
+      background: var(--bg-dark); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .subcat-icon svg { width: 28px; height: 28px; color: var(--accent); }
+    .subcat-card h3 {
+      font-family: var(--font-heading);
+      font-size: 18px; font-weight: 500;
+      margin-bottom: 8px; color: var(--text-primary);
+    }
+    .subcat-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 80px 48px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 400; letter-spacing: -0.8px;
+      color: var(--text-primary); margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 16px; color: var(--text-secondary);
+      max-width: 560px; margin: 0 auto 32px; line-height: 1.7;
+    }
+    .btn-dark {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #000; color: #fff;
+      padding: 16px 32px; border-radius: 100px;
+      text-decoration: none; font-size: 16px; font-weight: 500;
+    }
+    .btn-dark svg {
+      width: 18px; height: 18px; stroke: var(--accent);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-dark:hover svg { transform: translateX(4px); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      color: rgba(255,255,255,0.4); font-size: 13px;
+    }
+    .footer-left { display: flex; align-items: center; gap: 24px; }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.6); text-decoration: none;
+      font-family: var(--font-heading); font-weight: 500; font-size: 15px;
+    }
+    .footer-logo svg { width: 28px; height: 28px; opacity: 0.6; }
+    .footer-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); }
+    .footer-left a {
+      color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .footer-left a svg { width: 14px; height: 14px; }
+    .footer-left a:hover { color: rgba(255,255,255,0.7); }
+    .footer-right { display: flex; align-items: center; gap: 24px; }
+    .footer-right a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; }
+    .footer-right a:hover { color: rgba(255,255,255,0.7); }
+
+    /* FADE-IN */
+    .fade-in {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .word-reveal .word {
+      display: inline-block; opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .word-reveal.visible .word { opacity: 1; transform: translateY(0); }
+
+    .scroll-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 999;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .scroll-top.visible { opacity: 1; visibility: visible; }
+    .scroll-top:hover { transform: translateY(-3px); }
+    .scroll-top svg { width: 20px; height: 20px; color: #000; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .navbar { padding: 0 24px; }
+      .product-hero { padding: 60px 24px; }
+      .product-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .content-section { padding: 60px 24px; }
+      .subcategories { padding: 40px 24px; }
+      .subcat-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .cta-section { padding: 60px 24px; }
+    }
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+      .navbar-cta, .navbar-right .lang-switch { display: none; }
+      .navbar-logo svg { width: 32px; height: 32px; }
+      .navbar-logo span { font-size: 20px; letter-spacing: 1px; }
+      .hamburger { display: flex; z-index: 1101; }
+      .hamburger.active span { background: #fff; }
+      .mobile-only { display: list-item; }
+
+      .navbar-links.mobile-open {
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        position: fixed; inset: 0;
+        background: #000;
+        padding: 100px 40px 60px;
+        gap: 0; z-index: 1050;
+        transform: none; list-style: none;
+      }
+      .navbar-links.mobile-open li {
+        width: 100%; text-align: center;
+        opacity: 0; transform: translateY(20px);
+        animation: menuItemIn 0.4s ease forwards;
+      }
+      .navbar-links.mobile-open li:nth-child(1) { animation-delay: 0.05s; }
+      .navbar-links.mobile-open li:nth-child(2) { animation-delay: 0.1s; }
+      .navbar-links.mobile-open li:nth-child(3) { animation-delay: 0.15s; }
+      .navbar-links.mobile-open li:nth-child(4) { animation-delay: 0.2s; }
+      .navbar-links.mobile-open li:nth-child(5) { animation-delay: 0.25s; }
+      .navbar-links.mobile-open li:nth-child(6) { animation-delay: 0.3s; }
+      @keyframes menuItemIn { to { opacity: 1; transform: translateY(0); } }
+      .navbar-links.mobile-open a {
+        font-size: 28px; font-weight: 400;
+        padding: 18px 0; width: 100%; display: block;
+        border-radius: 0; color: rgba(255,255,255,0.45);
+        font-family: 'Space Grotesk', sans-serif;
+        background: none; letter-spacing: 0.5px;
+      }
+      .navbar-links.mobile-open a:hover,
+      .navbar-links.mobile-open a.active { color: #fff; background: none; }
+
+      .mobile-menu-footer {
+        display: flex !important; margin-top: auto; padding-top: 24px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        flex-direction: column; gap: 0; list-style: none; width: 100%; align-items: center;
+      }
+      .mobile-menu-contact {
+        display: flex; flex-direction: column; gap: 8px;
+        padding: 16px 0; width: 100%; align-items: center;
+      }
+      .mobile-menu-contact a {
+        font-size: 13px !important; font-weight: 400 !important;
+        font-family: 'Inter', sans-serif !important;
+        color: rgba(255,255,255,0.35) !important;
+        text-decoration: none; padding: 4px 0 !important;
+      }
+      .lang-flag { font-size: 14px; }
+      body.menu-open { overflow: hidden; }
+      body.menu-open .navbar {
+        position: fixed; top: 0; left: 0; right: 0;
+        background: transparent; border-bottom-color: transparent;
+        z-index: 1100; backdrop-filter: none;
+      }
+      body.menu-open .navbar-logo span { color: #fff; }
+
+      .product-hero h1 { font-size: 36px; }
+      .subcat-grid { grid-template-columns: 1fr; gap: 16px; }
+      .footer { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar-logo">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+        <defs>
+          <clipPath id="sq-nav"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath>
+          <linearGradient id="bg-nav" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#353647"/><stop offset="100%" stop-color="#23242F"/></linearGradient>
+        </defs>
+        <g clip-path="url(#sq-nav)"><rect width="120" height="120" fill="url(#bg-nav)"/></g>
+        <rect x="28" y="28" width="27" height="27" rx="6" fill="#ffffff"/>
+        <rect x="65" y="28" width="27" height="27" rx="6" fill="rgba(255,255,255,0.55)"/>
+        <rect x="28" y="65" width="27" height="27" rx="6" fill="rgba(255,255,255,0.55)"/>
+        <rect x="65" y="65" width="27" height="27" rx="6" fill="#D4FF00"/>
+      </svg>
+      <span>Quatropack</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="../index.html">Úvod</a></li>
+      <li><a href="../baliace-materialy.html" class="active">Baliace materiály</a></li>
+      <li><a href="../baliace-systemy.html">Baliace systémy</a></li>
+      <li class="mobile-only"><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#" class="coming-soon">Eshop <span class="coming-soon-badge">čoskoro</span></a></li>
+      <li class="mobile-menu-footer">
+        <div class="mobile-menu-contact">
+          <a href="tel:+421903757222"><span class="label">t:</span> +421 903 757 222</a>
+          <a href="mailto:info@quatropack.sk"><span class="label">m:</span> info@quatropack.sk</a>
+        </div>
+        <a href="../en/index.html" class="lang-switch"><span class="lang-flag">🇬🇧</span> EN</a>
+      </li>
+    </ul>
+    <div class="navbar-right">
+      <a href="../en/index.html" class="lang-switch">EN</a>
+      <a href="../index.html#kontakt" class="navbar-cta">Kontakt</a>
+      <button class="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PRODUCT HERO -->
+  <section class="product-hero">
+    <div class="product-hero-inner">
+      <div class="product-hero-content">
+        <div class="breadcrumb">
+          <a href="../index.html">Úvod</a>
+          <span>›</span>
+          <a href="../baliace-materialy.html">Baliace materiály</a>
+          <span>›</span>
+          <span>Stretch fólie</span>
+        </div>
+        <h1 class="fade-in">Stretch fólie</h1>
+        <div class="subtitle">Stabilizácia a ochrana paliet</div>
+        <p>Profesionálne stretch fólie pre ručné a strojné obaľovanie paliet. Zabezpečia pevnú fixáciu tovaru počas prepravy a skladovania, znížia poškodenia a optimalizujú spotrebu materiálu.</p>
+      </div>
+      <div class="product-hero-image">
+        <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" rx="12" fill="#F5F3EF"/>
+  <!-- Roll core -->
+  <ellipse cx="150" cy="110" rx="55" ry="55" fill="#E8E6E1" stroke="#D0CEC8" stroke-width="1.5"/>
+  <ellipse cx="150" cy="110" rx="22" ry="22" fill="#F5F3EF" stroke="#D0CEC8" stroke-width="1.5"/>
+  <!-- Film unwinding -->
+  <path d="M205 110 Q230 90 260 85 L260 95 Q235 98 210 112Z" fill="rgba(212,255,0,0.25)" stroke="rgba(45,46,58,0.15)" stroke-width="0.5"/>
+  <path d="M205 115 Q235 130 265 125 L265 118 Q238 122 210 112Z" fill="rgba(212,255,0,0.15)" stroke="rgba(45,46,58,0.15)" stroke-width="0.5"/>
+  <!-- Sheen lines on roll -->
+  <path d="M115 75 Q150 65 185 75" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+  <path d="M120 85 Q150 78 180 85" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  <!-- Label -->
+  <rect x="112" y="168" width="76" height="20" rx="10" fill="#2D2E3A"/>
+  <text x="150" y="182" font-family="Inter,sans-serif" font-size="10" fill="#D4FF00" text-anchor="middle" font-weight="600">STRETCH</text>
+</svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    <h2 class="fade-in">Čo je stretch fólia a prečo ju potrebujete</h2>
+    <p>Stretch fólia je elastický obalový materiál vyrábaný z polyetylénu (LLDPE), ktorý sa používa na obaľovanie paliet a zabezpečenie tovaru počas prepravy. Vďaka svojej schopnosti natiahnutia (až o 200–300 %) sa fólia pevne priľne k obsahu palety a vytvára stabilnú, chránenú jednotku.</p>
+    <p>V modernej logistike a výrobe je stretch fólia nenahraditeľná. Chráni tovar pred prachom, vlhkosťou a neoprávnenou manipuláciou. Správne zvolená fólia dokáže výrazne znížiť počet poškodení pri preprave a eliminovať reklamácie zo strany odberateľov.</p>
+    <p>V Quatropacku vám pomôžeme vybrať presný typ fólie podľa hmotnosti paliet, spôsobu balenia (ručné vs. strojné) a podmienok prepravy. Každá prevádzka má iné požiadavky — a my ich riešime na mieru.</p>
+  </section>
+
+  <!-- SUBCATEGORIES -->
+  <section class="subcategories">
+    <div class="subcategories-inner">
+      <h2 class="fade-in">Typy stretch fólií</h2>
+      <div class="subcat-grid">
+        <div class="subcat-card">
+          <div class="subcat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 2a10 10 0 110 20 10 10 0 010-20zM12 6v6l4 2"/></svg>
+          </div>
+          <h3>Ručná stretch fólia</h3>
+          <p>Pre menšie objemy a flexibilné balenie. Šírky 450–500 mm, rôzne hrúbky podľa typu tovaru.</p>
+        </div>
+        <div class="subcat-card">
+          <div class="subcat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 10h20M8 4v16M16 4v16"/></svg>
+          </div>
+          <h3>Strojná stretch fólia</h3>
+          <p>Pre automatické obaľovačky. Vyšší predĺženie, konzistentná kvalita, nižšia spotreba na paletu.</p>
+        </div>
+        <div class="subcat-card">
+          <div class="subcat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 2L4 7v10c0 6 8 8 8 8s8-2 8-8V7l-8-5Z"/><path d="M8 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Predĺžená (pre-stretch)</h3>
+          <p>Vopred natiahnutá fólia s minimálnou námahov pri aplikácii. Ideálna pre ergonomické balenie.</p>
+        </div>
+        <div class="subcat-card">
+          <div class="subcat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 3v18"/></svg>
+          </div>
+          <h3>Farebná a potlačená</h3>
+          <p>Značkovanie, identifikácia zásielok alebo ochrana pred krádežou. Rôzne farby a potlač na objednávku.</p>
+        </div>
+        <div class="subcat-card">
+          <div class="subcat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <h3>Micro stretch</h3>
+          <p>Úzka fólia pre fixáciu menších položiek a zväzovanie. Šírky 100–150 mm s ergonomickým držiakom.</p>
+        </div>
+        <div class="subcat-card">
+          <div class="subcat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <h3>Špeciálne fólie</h3>
+          <p>UV stabilizované, antistatické alebo VCI fólie pre špeciálne aplikácie a náročné podmienky.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2 class="fade-in">Potrebujete stretch fóliu na mieru?</h2>
+    <p>Povedzte nám, čo balíte a v akých objemoch. Navrhneme optimálny typ fólie a dodáme vzorky na testovanie.</p>
+    <a href="../index.html#kontakt" class="btn-dark">
+      Nezáväzný dopyt
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-left">
+      <a href="../index.html" class="footer-logo">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><clipPath id="sq-ft"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath></defs>
+          <g clip-path="url(#sq-ft)"><rect width="120" height="120" fill="rgba(255,255,255,0.15)"/></g>
+          <rect x="28" y="28" width="27" height="27" rx="6" fill="rgba(255,255,255,0.6)"/>
+          <rect x="65" y="28" width="27" height="27" rx="6" fill="rgba(255,255,255,0.3)"/>
+          <rect x="28" y="65" width="27" height="27" rx="6" fill="rgba(255,255,255,0.3)"/>
+          <rect x="65" y="65" width="27" height="27" rx="6" fill="#D4FF00" opacity="0.6"/>
+        </svg>
+        Quatropack
+      </a>
+      <span class="footer-divider"></span>
+      <a href="https://maps.google.com/?q=%C5%A0amor%C3%ADnska+4152,+903+01+Senec">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Šamorínska 4152, 903 01 Senec
+      </a>
+      <a href="tel:+421903757222">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +421 903 757 222
+      </a>
+      <a href="mailto:objednavky@tripsy.sk">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        objednavky@tripsy.sk
+      </a>
+    </div>
+    <div class="footer-right">
+      <a href="../index.html">Úvod</a>
+      <a href="../baliace-materialy.html">Baliace materiály</a>
+      <a href="../baliace-systemy.html">Baliace systémy</a>
+      <a href="#" class="coming-soon">Eshop</a>
+      <span>© 2026 Quatropack</span>
+    </div>
+  </footer>
+
+  <button class="scroll-top" aria-label="Späť hore" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 15l7-7 7 7"/></svg>
+  </button>
+
+  <script>
+    // Fade in animations
+    (function() {
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        if (el.tagName === 'H1' || el.tagName === 'H2') {
+          el.classList.remove('fade-in');
+          el.classList.add('word-reveal');
+          var html = el.innerHTML;
+          var parts = html.split(/(<br\s*\/?>)/gi);
+          var wordIndex = 0;
+          el.innerHTML = parts.map(function(part) {
+            if (part.match(/^<br/i)) return part;
+            return part.split(/(\s+)/).map(function(token) {
+              if (!token.trim()) return token;
+              var span = '<span class="word" style="transition-delay:' + (wordIndex * 0.06) + 's">' + token + '</span>';
+              wordIndex++;
+              return span;
+            }).join('');
+          }).join('');
+        }
+      });
+      var els = document.querySelectorAll('.fade-in, .word-reveal');
+      if (!els.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // Navbar shadow
+    var navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll to top
+    var scrollBtn = document.querySelector('.scroll-top');
+    window.addEventListener('scroll', function() {
+      scrollBtn.classList.toggle('visible', window.scrollY > 600);
+    });
+
+    // Page fade in
+    document.body.classList.add('loaded');
+
+    // Mobile menu
+    function toggleMobileMenu() {
+      document.querySelector('.hamburger').classList.toggle('active');
+      document.querySelector('.navbar-links').classList.toggle('mobile-open');
+      document.body.classList.toggle('menu-open');
+    }
+    window.toggleMobileMenu = toggleMobileMenu;
+
+    document.querySelectorAll('.navbar-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        var hamburger = document.querySelector('.hamburger');
+        if (hamburger) hamburger.classList.remove('active');
+        document.querySelector('.navbar-links').classList.remove('mobile-open');
+        document.body.classList.remove('menu-open');
+      });
+    });
+  </script>
+</body>
+</html>
