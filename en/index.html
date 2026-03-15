@@ -513,6 +513,7 @@
       .process-section h2 { position: static; }
       .contact-inner { grid-template-columns: 1fr; gap: 48px; }
       .contact-section { padding: 60px 24px; }
+
     }
     @media (max-width: 768px) {
       .navbar-links { display: none; }
@@ -630,7 +631,75 @@
         transition: transform 0.1s linear;
       }
       .logo-strip-logos img { height: 24px; max-width: 100px; }
+
+      .brand-slider-section { padding: 40px 0; overflow: hidden; }
+      .brand-slider-section > p { margin-left: 24px; }
+      .brand-slider-wrapper { padding: 0 24px; }
+      .brand-slider-track {
+        gap: 32px; overflow-x: auto;
+        -ms-overflow-style: none; scrollbar-width: none;
+      }
+      .brand-slider-track::-webkit-scrollbar { display: none; }
+      .brand-slider-track img { height: 60px; max-width: 120px; }
+      .brand-slider-btn { display: none; }
+
     }
+
+    /* ===== BRAND SLIDER ===== */
+    .brand-slider-section {
+      padding: 48px 48px;
+      max-width: 1300px; margin: 0 auto;
+      text-align: center;
+    }
+    .brand-slider-section p {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-white); border: 1px solid var(--border-light);
+      border-radius: 100px; padding: 10px 22px;
+      font-size: 14px; font-weight: 400; color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      letter-spacing: 0.2px;
+      margin-bottom: 32px;
+    }
+    .brand-slider-wrapper {
+      position: relative;
+      padding: 0 48px;
+    }
+    .brand-slider-track {
+      display: flex; align-items: center;
+      gap: 48px;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 8px 0;
+    }
+    .brand-slider-track img {
+      height: 80px; max-width: 180px; flex-shrink: 0;
+      object-fit: contain;
+      filter: grayscale(0%) opacity(1);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .brand-slider-track img:hover {
+      transform: scale(1.08);
+    }
+    .brand-slider-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--bg-white);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 2;
+      transition: background 0.2s, box-shadow 0.2s;
+      font-size: 18px; color: var(--text-primary);
+      line-height: 1;
+    }
+    .brand-slider-btn:hover {
+      background: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .brand-slider-btn.prev { left: 0; }
+    .brand-slider-btn.next { right: 0; }
+
   </style>
 </head>
 <body>
@@ -689,17 +758,21 @@
   <!-- HERO IMAGE -->
   <div class="hero-image"></div>
 
-  <!-- BRANDS STRIP -->
-  <div class="logo-strip">
+  <!-- BRANDS SLIDER -->
+  <div class="brand-slider-section">
     <p>Shop by brands</p>
-    <div class="logo-strip-logos brands">
-      <img src="../tesa.svg" alt="Tesa">
-      <img src="../3m.svg" alt="3M">
-      <img src="../lohmann.svg" alt="Lohmann">
-      <img src="../monta.svg" alt="Monta">
-      <img src="../hibond.svg" alt="Hi-Bond">
-      <img src="../soco.svg" alt="Soco">
-      <img src="../mosca.svg" alt="Mosca">
+    <div class="brand-slider-wrapper">
+      <button class="brand-slider-btn prev" aria-label="Previous" onclick="slideBrands(-1)">&#8249;</button>
+      <div class="brand-slider-track" id="brandSlider">
+        <img src="../tesa.svg" alt="Tesa">
+        <img src="../3m.svg" alt="3M">
+        <img src="../lohmann.svg" alt="Lohmann">
+        <img src="../monta.svg" alt="Monta">
+        <img src="../hibond.svg" alt="Hi-Bond">
+        <img src="../soco.svg" alt="Soco">
+        <img src="../mosca.svg" alt="Mosca">
+      </div>
+      <button class="brand-slider-btn next" aria-label="Next" onclick="slideBrands(1)">&#8250;</button>
     </div>
   </div>
 
@@ -745,6 +818,8 @@
       </div>
     </div>
   </section>
+
+
 
   <!-- INDUSTRIES -->
   <section class="section-bg" id="industries">
@@ -1088,5 +1163,34 @@
     })();
   </script>
 
+
+  <script>
+    // Brand slider
+    (function() {
+      var track = document.getElementById('brandSlider');
+      if (!track) return;
+      var scrollAmount = 200;
+      var autoScrollInterval;
+      var isHovered = false;
+
+      window.slideBrands = function(dir) {
+        track.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+      };
+
+      function autoScroll() {
+        if (isHovered) return;
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: 1, behavior: 'auto' });
+        }
+      }
+
+      track.addEventListener('mouseenter', function() { isHovered = true; });
+      track.addEventListener('mouseleave', function() { isHovered = false; });
+
+      autoScrollInterval = setInterval(autoScroll, 30);
+    })();
+  </script>
 </body>
 </html>

@@ -409,6 +409,7 @@
       section { padding: 60px 24px; }
       .hero { padding: 60px 24px; }
       .materials-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
       .steps-grid { grid-template-columns: 1fr; gap: 24px; }
       .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       .delivery-features { grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -518,6 +519,7 @@
       .hero { padding: 48px 20px 40px; }
       section { padding: 40px 20px; }
       .materials-grid { grid-template-columns: 1fr; gap: 20px; margin-bottom: 0; }
+
       .material-card { padding: 24px; }
       .steps-grid { grid-template-columns: 1fr; gap: 20px; }
       .step-card { padding: 24px; }
@@ -548,6 +550,72 @@
     .scroll-top.visible { opacity: 1; visibility: visible; }
     .scroll-top:hover { transform: translateY(-3px); }
     .scroll-top svg { width: 20px; height: 20px; color: #000; }
+
+    /* ===== PHOTO CATEGORY CARDS ===== */
+    .category-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-bottom: 40px;
+    }
+    .category-card {
+      position: relative;
+      border: 1px solid var(--border-light); border-radius: 16px;
+      background: var(--bg-white); overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    .category-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+    }
+    .category-card-image {
+      width: 100%; aspect-ratio: 3/2;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; background: #F5F3EF;
+    }
+    .category-card-image svg {
+      width: 100%; height: 100%;
+    }
+    .category-card-image img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .category-card-body {
+      padding: 24px;
+    }
+    .category-card-body h3 {
+      font-family: var(--font-heading);
+      font-size: 20px; font-weight: 500;
+      margin-bottom: 8px; color: var(--text-primary);
+    }
+    .category-card-body p {
+      font-size: 14px; color: var(--text-secondary);
+      line-height: 1.6; margin-bottom: 16px;
+    }
+    .category-card-link {
+      color: var(--text-primary); text-decoration: none;
+      font-size: 14px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: gap 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .category-card-link::after {
+      content: ''; position: absolute; inset: 0; border-radius: 16px;
+    }
+    .category-card-link .card-arrow {
+      display: inline-block; color: #D4FF00;
+      transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .category-card:hover .category-card-link { gap: 10px; }
+    .category-card:hover .category-card-link .card-arrow { transform: translateX(4px); }
+
+    /* Responsive overrides for photo category cards */
+    @media (max-width: 1024px) {
+      .category-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    @media (max-width: 768px) {
+      .category-grid { grid-template-columns: 1fr; gap: 16px; }
+      .category-card-body { padding: 20px; }
+      .category-card-body h3 { font-size: 18px; }
+      .category-card-body p { font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -610,96 +678,88 @@
   <section class="materials-section">
     <div class="section-container">
       <h2 class="fade-in">Najpoužívanejšie materiály</h2>
-      <div class="materials-grid">
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
-              <path d="M3 9h18M9 9v12M15 9v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+            <div class="category-grid">
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/stretch_folie.png" alt="Stretch fólie" loading="lazy">
           </div>
-          <h3>Stretch fólie</h3>
-          <p>Stabilizácia a ochrana paliet. Dostupné v ručnom a strojnom spracovaní podľa vašich potrieb.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
-        </div>
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="6" width="20" height="12" rx="1" stroke="currentColor" stroke-width="2"/>
-              <path d="M2 10h20M8 6v12M16 6v12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+          <div class="category-card-body">
+            <h3>Stretch fólie</h3>
+            <p>Stabilizácia a ochrana paliet. Dostupné v ručnom a strojnom spracovaní podľa vašich potrieb.</p>
+            <a href="kategoria/stretch-folie.html" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
           </div>
-          <h3>Viazacie pásky</h3>
-          <p>Pevné páskovanie balíkov a paliet. PP a PET varianty pre rôzne aplikácie.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
         </div>
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 3h18v18H3V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M3 9h18M9 3v18M15 3v18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/viazacie_pasky.png" alt="Viazacie pásky" loading="lazy">
           </div>
-          <h3>Lepiace pásky</h3>
-          <p>Uzatváranie kartónov s rôznymi typmi lepidiel pre všetky povrchy.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
-        </div>
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Z" stroke="currentColor" stroke-width="2"/>
-              <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <div class="category-card-body">
+            <h3>Viazacie pásky</h3>
+            <p>Pevné páskovanie balíkov a paliet. PP a PET varianty pre rôzne aplikácie.</p>
+            <a href="#kontakt" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
           </div>
-          <h3>Ochrana a výplne</h3>
-          <p>Ochrana hrán, výplne a fixácia tovaru počas prepravy a skladovania.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
         </div>
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 8v4h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/lepiace_pasky.png" alt="Lepiace pásky" loading="lazy">
           </div>
-          <h3>Doplnky a príslušenstvo</h3>
-          <p>Odvíjače, rohy, spony a ďalšie pomocné prvky pre kompletnú baliacu sústavu.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
-        </div>
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 8V21H3V8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M23 3H1v5h22V3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M10 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+          <div class="category-card-body">
+            <h3>Lepiace pásky</h3>
+            <p>Uzatváranie kartónov s rôznymi typmi lepidiel pre všetky povrchy.</p>
+            <a href="#kontakt" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
           </div>
-          <h3>Kartóny</h3>
-          <p>Klopové, trojvrstvové a päťvrstvové kartóny v štandardných aj zákazkových rozmeroch.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
         </div>
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 4h16v16H4V4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M4 12h16M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-            </svg>
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/ochrana_vyplne.png" alt="Ochrana a výplne" loading="lazy">
           </div>
-          <h3>LDPE, HDPE, PP fólie</h3>
-          <p>Priemyselné fólie pre balenie, ochranu a skladovanie. Rôzne hrúbky a šírky podľa aplikácie.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
-        </div>
-        <div class="material-card">
-          <div class="material-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 2h8l4 6v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8l4-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M4 8h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+          <div class="category-card-body">
+            <h3>Ochrana a výplne</h3>
+            <p>Ochrana hrán, výplne a fixácia tovaru počas prepravy a skladovania.</p>
+            <a href="#kontakt" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
           </div>
-          <h3>Vrecia</h3>
-          <p>PE vrecia pre odpad, balenie a prepravu. Dostupné v rôznych veľkostiach a hrúbkach.</p>
-          <a href="#kontakt">Zistiť viac <span class="card-arrow">→</span></a>
         </div>
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/doplnky.png" alt="Doplnky a príslušenstvo" loading="lazy">
+          </div>
+          <div class="category-card-body">
+            <h3>Doplnky a príslušenstvo</h3>
+            <p>Odvíjače, rohy, spony a ďalšie pomocné prvky pre kompletnú baliacu sústavu.</p>
+            <a href="#kontakt" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
+          </div>
+        </div>
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/kartony.png" alt="Kartóny" loading="lazy">
+          </div>
+          <div class="category-card-body">
+            <h3>Kartóny</h3>
+            <p>Klopové, trojvrstvové a päťvrstvové kartóny v štandardných aj zákazkových rozmeroch.</p>
+            <a href="#kontakt" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
+          </div>
+        </div>
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/ldpe_folie.png" alt="LDPE, HDPE, PP fólie" loading="lazy">
+          </div>
+          <div class="category-card-body">
+            <h3>LDPE, HDPE, PP fólie</h3>
+            <p>Priemyselné fólie pre balenie, ochranu a skladovanie. Rôzne hrúbky a šírky podľa aplikácie.</p>
+            <a href="#kontakt" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
+          </div>
+        </div>
+        <div class="category-card">
+          <div class="category-card-image">
+            <img src="images/vrecia.png" alt="Vrecia" loading="lazy">
+          </div>
+          <div class="category-card-body">
+            <h3>Vrecia</h3>
+            <p>PE vrecia pre odpad, balenie a prepravu. Dostupné v rôznych veľkostiach a hrúbkach.</p>
+            <a href="#kontakt" class="category-card-link">Zistiť viac <span class="card-arrow">→</span></a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>

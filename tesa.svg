@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50">
-  <rect width="160" height="50" rx="4" fill="#003D7C"/>
-  <text x="80" y="33" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">tesa</text>
+  <rect width="130" height="50" rx="2" fill="#CC0000"/>
+  <rect x="130" width="30" height="50" rx="2" fill="#4A90D9"/>
+  <path d="M131 0 L130 0 L130 50 L131 50 L160 25 Z" fill="#4A90D9" opacity="0.8"/>
+  <text x="65" y="36" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">tesa</text>
+  <text x="118" y="16" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF">®</text>
 </svg>
