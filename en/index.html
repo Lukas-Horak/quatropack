@@ -634,13 +634,14 @@
 
       .brand-slider-section { padding: 40px 0; overflow: hidden; }
       .brand-slider-section > p { margin-left: 24px; }
-      .brand-slider-wrapper { padding: 0 24px; }
+      .brand-slider-wrapper { padding: 0; position: static; }
       .brand-slider-track {
-        gap: 32px; overflow-x: auto;
-        -ms-overflow-style: none; scrollbar-width: none;
+        gap: 40px; overflow: visible;
+        padding: 0 24px;
+        will-change: transform;
+        transition: transform 0.1s linear;
       }
-      .brand-slider-track::-webkit-scrollbar { display: none; }
-      .brand-slider-track img { height: 60px; max-width: 120px; }
+      .brand-slider-track img { height: 40px; max-width: 120px; }
       .brand-slider-btn { display: none; }
 
     }
@@ -673,7 +674,7 @@
       padding: 8px 0;
     }
     .brand-slider-track img {
-      height: 80px; max-width: 180px; flex-shrink: 0;
+      height: 100px; max-width: 220px; flex-shrink: 0;
       object-fit: contain;
       filter: grayscale(0%) opacity(1);
       transition: transform 0.3s ease, filter 0.3s ease;
@@ -699,6 +700,20 @@
     }
     .brand-slider-btn.prev { left: 0; }
     .brand-slider-btn.next { right: 0; }
+
+    /* Mobile overrides for brand slider (must be after desktop rules) */
+    @media (max-width: 768px) {
+      .brand-slider-wrapper { padding: 0; position: static; }
+      .brand-slider-track {
+        gap: 40px; overflow: visible;
+        padding: 0 24px;
+        will-change: transform;
+        transition: transform 0.1s linear;
+        overflow-x: visible;
+      }
+      .brand-slider-track img { height: 40px; max-width: 120px; }
+      .brand-slider-btn { display: none; }
+    }
 
   </style>
 </head>
@@ -1073,24 +1088,34 @@
 
   <script>
     (function(){
-      const strip = document.querySelector('.logo-strip-logos');
-      if (!strip) return;
-      const section = document.querySelector('.logo-strip');
+      // Parallax scroll for both logo-strip and brand-slider on mobile
+      var scrollSections = [];
+      document.querySelectorAll('.logo-strip').forEach(function(s) {
+        scrollSections.push({ section: s, track: s.querySelector('.logo-strip-logos') });
+      });
+      document.querySelectorAll('.brand-slider-section').forEach(function(s) {
+        scrollSections.push({ section: s, track: s.querySelector('.brand-slider-track') });
+      });
+      if (!scrollSections.length) return;
 
       function onScroll() {
-        if (window.innerWidth > 768) { strip.style.transform = ''; return; }
-        const rect = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        // don't animate until section is at least 30% visible
-        if (rect.bottom < 0 || rect.top > vh * 0.7) { return; }
-        // progress starts when section is 70% up the viewport, ends when it leaves top
-        const startPoint = vh * 0.7;
-        const endPoint = -rect.height;
-        const progress = (startPoint - rect.top) / (startPoint - endPoint);
-        const clamped = Math.max(0, Math.min(1, progress));
-        const maxShift = Math.max(0, strip.scrollWidth - section.clientWidth);
-        const shift = clamped * maxShift;
-        strip.style.transform = 'translateX(' + (-shift) + 'px)';
+        if (window.innerWidth > 768) {
+          scrollSections.forEach(function(item) { item.track.style.transform = ''; });
+          return;
+        }
+        var vh = window.innerHeight;
+        scrollSections.forEach(function(item) {
+          var section = item.section;
+          var logos = item.track;
+          var rect = section.getBoundingClientRect();
+          if (rect.bottom < 0 || rect.top > vh * 0.7) return;
+          var startPoint = vh * 0.7;
+          var endPoint = -rect.height;
+          var progress = (startPoint - rect.top) / (startPoint - endPoint);
+          var clamped = Math.max(0, Math.min(1, progress));
+          var maxShift = Math.max(0, logos.scrollWidth - section.clientWidth);
+          logos.style.transform = 'translateX(' + (-clamped * maxShift) + 'px)';
+        });
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
