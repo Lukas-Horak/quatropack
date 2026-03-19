@@ -163,10 +163,6 @@
     }
 
     /* ===== MARQUEE / LOGO STRIPS ===== */
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
     .marquee-section {
       padding: 48px 0;
       max-width: 1300px; margin: 0 auto;
@@ -185,10 +181,7 @@
     .marquee-track {
       display: flex; align-items: center;
       width: max-content;
-      animation: marquee var(--marquee-duration, 30s) linear infinite;
-    }
-    .marquee-section:hover .marquee-track {
-      animation-play-state: paused;
+      will-change: transform;
     }
     .marquee-track .marquee-set {
       display: flex; align-items: center;
@@ -1116,6 +1109,47 @@
     });
   </script>
 
+  <script>
+    // ===== MARQUEE ENGINE =====
+    (function() {
+      var SPEED = 50; // pixels per second
+      document.querySelectorAll('.marquee-section').forEach(function(section) {
+        var track = section.querySelector('.marquee-track');
+        if (!track) return;
+        var sets = track.querySelectorAll('.marquee-set');
+        if (sets.length < 2) return;
+
+        var offset = 0;
+        var paused = false;
+        var halfWidth = sets[0].offsetWidth + parseFloat(getComputedStyle(sets[0]).paddingLeft) + parseFloat(getComputedStyle(sets[0]).paddingRight);
+        var lastTime = 0;
+
+        function measure() {
+          halfWidth = track.scrollWidth / 2;
+        }
+
+        function tick(now) {
+          if (!lastTime) lastTime = now;
+          var dt = (now - lastTime) / 1000;
+          lastTime = now;
+          if (!paused) {
+            offset -= SPEED * dt;
+            if (Math.abs(offset) >= halfWidth) {
+              offset += halfWidth;
+            }
+            track.style.transform = 'translateX(' + offset + 'px)';
+          }
+          requestAnimationFrame(tick);
+        }
+
+        section.addEventListener('mouseenter', function() { paused = true; });
+        section.addEventListener('mouseleave', function() { paused = false; });
+        window.addEventListener('resize', measure);
+        measure();
+        requestAnimationFrame(tick);
+      });
+    })();
+  </script>
 
 </body>
 </html>
