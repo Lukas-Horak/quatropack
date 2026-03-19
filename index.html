@@ -162,13 +162,18 @@
       filter: grayscale(100%);
     }
 
-    /* ===== LOGO STRIP ===== */
-    .logo-strip {
-      padding: 48px 48px 48px;
+    /* ===== MARQUEE / LOGO STRIPS ===== */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-section {
+      padding: 48px 0;
       max-width: 1300px; margin: 0 auto;
       text-align: center;
+      overflow: hidden;
     }
-    .logo-strip p {
+    .marquee-section p.marquee-label {
       display: inline-flex; align-items: center; gap: 8px;
       background: var(--bg-white); border: 1px solid var(--border-light);
       border-radius: 100px; padding: 10px 22px;
@@ -177,21 +182,37 @@
       letter-spacing: 0.2px;
       margin-bottom: 32px;
     }
-    .logo-strip-logos {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 40px;
+    .marquee-track {
+      display: flex; align-items: center;
+      width: max-content;
+      animation: marquee var(--marquee-duration, 30s) linear infinite;
     }
-    .logo-strip-logos img {
+    .marquee-section:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    .marquee-track .marquee-set {
+      display: flex; align-items: center;
+      gap: var(--marquee-gap, 48px);
+      padding: 0 calc(var(--marquee-gap, 48px) / 2);
+    }
+    /* Client logos (greyscale) */
+    .marquee-track .marquee-set.clients img {
       height: 30px; max-width: 140px; flex-shrink: 0;
       object-fit: contain;
       filter: grayscale(100%) opacity(0.3);
       transition: filter 0.4s ease;
     }
-    .logo-strip-logos img:hover {
+    .marquee-track .marquee-set.clients img:hover {
       filter: grayscale(0%) opacity(1);
     }
-    .logo-strip-logos.brands img {
-      filter: grayscale(0%) opacity(1);
+    /* Brand logos (full color, larger) */
+    .marquee-track .marquee-set.brands img {
+      height: 100px; max-width: 220px; flex-shrink: 0;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    .marquee-track .marquee-set.brands img:hover {
+      transform: scale(1.08);
     }
 
     /* ===== SECTIONS ===== */
@@ -607,29 +628,6 @@
       .footer { flex-direction: column; gap: 16px; text-align: center; }
       .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
       .cta-banner { padding: 48px 24px; margin: 0 24px 48px; }
-      .logo-strip { padding: 40px 0; overflow: hidden; }
-      .logo-strip p { margin-left: 24px; }
-      .logo-strip-logos {
-        justify-content: flex-start;
-        gap: 32px;
-        overflow: visible;
-        padding: 0 24px;
-        will-change: transform;
-        transition: transform 0.1s linear;
-      }
-      .logo-strip-logos img { height: 24px; max-width: 100px; }
-
-      .brand-slider-section { padding: 40px 0; overflow: hidden; }
-      .brand-slider-section > p { margin-left: 24px; }
-      .brand-slider-wrapper { padding: 0; position: static; }
-      .brand-slider-track {
-        gap: 40px; overflow: visible;
-        padding: 0 24px;
-        will-change: transform;
-        transition: transform 0.1s linear;
-      }
-      .brand-slider-track img { height: 40px; max-width: 120px; }
-      .brand-slider-btn { display: none; }
 
     }
 
@@ -647,73 +645,17 @@
     .scroll-top svg { width: 20px; height: 20px; color: #000; }
 
 
-    /* ===== BRAND SLIDER ===== */
-    .brand-slider-section {
-      padding: 48px 48px;
-      max-width: 1300px; margin: 0 auto;
-      text-align: center;
-    }
-    .brand-slider-section p {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--bg-white); border: 1px solid var(--border-light);
-      border-radius: 100px; padding: 10px 22px;
-      font-size: 14px; font-weight: 400; color: var(--text-primary);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      letter-spacing: 0.2px;
-      margin-bottom: 32px;
-    }
-    .brand-slider-wrapper {
-      position: relative;
-      padding: 0 48px;
-    }
-    .brand-slider-track {
-      display: flex; align-items: center;
-      gap: 48px;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding: 8px 0;
-    }
-    .brand-slider-track img {
-      height: 100px; max-width: 220px; flex-shrink: 0;
-      object-fit: contain;
-      filter: grayscale(0%) opacity(1);
-      transition: transform 0.3s ease, filter 0.3s ease;
-    }
-    .brand-slider-track img:hover {
-      transform: scale(1.08);
-    }
-    .brand-slider-btn {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--bg-white);
-      border: 1px solid var(--border-light);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; z-index: 2;
-      transition: background 0.2s, box-shadow 0.2s;
-      font-size: 18px; color: var(--text-primary);
-      line-height: 1;
-    }
-    .brand-slider-btn:hover {
-      background: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .brand-slider-btn.prev { left: 0; }
-    .brand-slider-btn.next { right: 0; }
-
-    /* Mobile overrides for brand slider (must be after desktop rules) */
+    /* ===== MOBILE MARQUEE OVERRIDES ===== */
     @media (max-width: 768px) {
-      .brand-slider-wrapper { padding: 0; position: static; }
-      .brand-slider-track {
-        gap: 40px; overflow: visible;
-        padding: 0 24px;
-        will-change: transform;
-        transition: transform 0.1s linear;
-        overflow-x: visible;
+      .marquee-track .marquee-set.brands img {
+        height: 40px; max-width: 120px;
       }
-      .brand-slider-track img { height: 40px; max-width: 120px; }
-      .brand-slider-btn { display: none; }
+      .marquee-track .marquee-set.clients img {
+        height: 24px; max-width: 100px;
+      }
+      .marquee-section {
+        padding: 40px 0;
+      }
     }
 
   </style>
@@ -774,11 +716,10 @@
   <div class="hero-image"></div>
 
   <!-- BRANDS SLIDER -->
-  <div class="brand-slider-section">
-    <p>Nakupujte podľa značiek</p>
-    <div class="brand-slider-wrapper">
-      <button class="brand-slider-btn prev" aria-label="Previous" onclick="slideBrands(-1)">&#8249;</button>
-      <div class="brand-slider-track" id="brandSlider">
+  <div class="marquee-section" style="--marquee-duration: 25s; --marquee-gap: 64px;">
+    <p class="marquee-label">Nakupujte podľa značiek</p>
+    <div class="marquee-track">
+      <div class="marquee-set brands">
         <img src="tesa.svg" alt="Tesa">
         <img src="3m.svg" alt="3M">
         <img src="lohmann.svg" alt="Lohmann">
@@ -787,7 +728,15 @@
         <img src="soco.svg" alt="Soco">
         <img src="mosca.svg" alt="Mosca">
       </div>
-      <button class="brand-slider-btn next" aria-label="Next" onclick="slideBrands(1)">&#8250;</button>
+      <div class="marquee-set brands" aria-hidden="true">
+        <img src="tesa.svg" alt="Tesa">
+        <img src="3m.svg" alt="3M">
+        <img src="lohmann.svg" alt="Lohmann">
+        <img src="monta.svg" alt="Monta">
+        <img src="hibond.svg" alt="Hi-Bond">
+        <img src="soco.svg" alt="Soco">
+        <img src="mosca.svg" alt="Mosca">
+      </div>
     </div>
   </div>
 
@@ -892,15 +841,25 @@
 
   <!-- CLIENT LOGOS -->
   <section class="section-bg">
-    <div class="logo-strip" style="padding: 20px 48px 100px;">
-      <p style="margin-bottom: 52px;">Overené firmami ako</p>
-      <div class="logo-strip-logos">
-        <img src="eset.svg" alt="ESET">
-        <img src="skoda.svg" alt="ŠKODA">
-        <img src="ikea.svg" alt="IKEA">
-        <img src="hyundai.svg" alt="HYUNDAI">
-        <img src="samsung.svg" alt="SAMSUNG">
-        <img src="olympus.svg" alt="OLYMPUS">
+    <div class="marquee-section" style="--marquee-duration: 20s; --marquee-gap: 56px; padding: 20px 0 100px;">
+      <p class="marquee-label" style="margin-bottom: 52px;">Overené firmami ako</p>
+      <div class="marquee-track">
+        <div class="marquee-set clients">
+          <img src="eset.svg" alt="ESET">
+          <img src="skoda.svg" alt="ŠKODA">
+          <img src="ikea.svg" alt="IKEA">
+          <img src="hyundai.svg" alt="HYUNDAI">
+          <img src="samsung.svg" alt="SAMSUNG">
+          <img src="olympus.svg" alt="OLYMPUS">
+        </div>
+        <div class="marquee-set clients" aria-hidden="true">
+          <img src="eset.svg" alt="ESET">
+          <img src="skoda.svg" alt="ŠKODA">
+          <img src="ikea.svg" alt="IKEA">
+          <img src="hyundai.svg" alt="HYUNDAI">
+          <img src="samsung.svg" alt="SAMSUNG">
+          <img src="olympus.svg" alt="OLYMPUS">
+        </div>
       </div>
     </div>
   </section>
@@ -1084,42 +1043,7 @@
     })();
   </script>
 
-  <script>
-    (function(){
-      // Parallax scroll for both logo-strip and brand-slider on mobile
-      var scrollSections = [];
-      document.querySelectorAll('.logo-strip').forEach(function(s) {
-        scrollSections.push({ section: s, track: s.querySelector('.logo-strip-logos') });
-      });
-      document.querySelectorAll('.brand-slider-section').forEach(function(s) {
-        scrollSections.push({ section: s, track: s.querySelector('.brand-slider-track') });
-      });
-      if (!scrollSections.length) return;
 
-      function onScroll() {
-        if (window.innerWidth > 768) {
-          scrollSections.forEach(function(item) { item.track.style.transform = ''; });
-          return;
-        }
-        var vh = window.innerHeight;
-        scrollSections.forEach(function(item) {
-          var section = item.section;
-          var logos = item.track;
-          var rect = section.getBoundingClientRect();
-          if (rect.bottom < 0 || rect.top > vh * 0.7) return;
-          var startPoint = vh * 0.7;
-          var endPoint = -rect.height;
-          var progress = (startPoint - rect.top) / (startPoint - endPoint);
-          var clamped = Math.max(0, Math.min(1, progress));
-          var maxShift = Math.max(0, logos.scrollWidth - section.clientWidth);
-          logos.style.transform = 'translateX(' + (-clamped * maxShift) + 'px)';
-        });
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
-    })();
-  </script>
 
   <script>
     // ===== FADE-IN + WORD REVEAL ON SCROLL =====
@@ -1192,33 +1116,6 @@
     });
   </script>
 
-  <script>
-    // Brand slider
-    (function() {
-      var track = document.getElementById('brandSlider');
-      if (!track) return;
-      var scrollAmount = 200;
-      var autoScrollInterval;
-      var isHovered = false;
 
-      window.slideBrands = function(dir) {
-        track.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
-      };
-
-      function autoScroll() {
-        if (isHovered) return;
-        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: 1, behavior: 'auto' });
-        }
-      }
-
-      track.addEventListener('mouseenter', function() { isHovered = true; });
-      track.addEventListener('mouseleave', function() { isHovered = false; });
-
-      autoScrollInterval = setInterval(autoScroll, 30);
-    })();
-  </script>
 </body>
 </html>
