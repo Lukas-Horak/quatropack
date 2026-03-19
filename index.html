@@ -1142,8 +1142,11 @@
           requestAnimationFrame(tick);
         }
 
-        section.addEventListener('mouseenter', function() { paused = true; });
-        section.addEventListener('mouseleave', function() { paused = false; });
+        // Hover pauza len na zariadeniach s myšou (nie mobile touch)
+        if (window.matchMedia('(hover: hover)').matches) {
+          section.addEventListener('mouseenter', function() { paused = true; });
+          section.addEventListener('mouseleave', function() { paused = false; });
+        }
         window.addEventListener('resize', measure);
         measure();
         requestAnimationFrame(tick);
