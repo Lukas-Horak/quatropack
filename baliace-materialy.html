@@ -382,26 +382,31 @@
     /* FOOTER */
     .footer {
       background: var(--bg-dark); border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 24px 48px; display: flex; align-items: center; justify-content: space-between;
-      color: rgba(255,255,255,0.4); font-size: 13px;
+      padding: 32px 48px 24px; color: rgba(255,255,255,0.4); font-size: 13px;
     }
-    .footer-left { display: flex; align-items: center; gap: 24px; }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
     .footer-logo {
       display: flex; align-items: center; gap: 8px;
       color: rgba(255,255,255,0.6); text-decoration: none;
       font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 15px;
     }
     .footer-logo svg { width: 28px; height: 28px; opacity: 0.6; }
-    .footer-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); }
-    .footer-left a {
+    .footer-contacts { display: flex; align-items: center; gap: 24px; }
+    .footer-contacts a {
       color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px;
       display: flex; align-items: center; gap: 6px;
     }
-    .footer-left a svg { width: 14px; height: 14px; }
-    .footer-left a:hover { color: rgba(255,255,255,0.7); }
-    .footer-right { display: flex; align-items: center; gap: 24px; }
-    .footer-right a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; }
-    .footer-right a:hover { color: rgba(255,255,255,0.7); }
+    .footer-contacts a svg { width: 14px; height: 14px; }
+    .footer-contacts a:hover { color: rgba(255,255,255,0.7); }
+    .footer-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-nav { display: flex; align-items: center; gap: 24px; }
+    .footer-nav a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; }
+    .footer-nav a:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy { color: rgba(255,255,255,0.25); font-size: 12px; }
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
@@ -534,8 +539,11 @@
       .form-row { grid-template-columns: 1fr; }
       .form-footer { flex-direction: column; align-items: stretch; text-align: center; }
       .btn-accent { justify-content: center; white-space: nowrap; }
-      .footer { flex-direction: column; gap: 16px; text-align: center; }
-      .footer-left, .footer-right { flex-wrap: wrap; justify-content: center; }
+      .footer { padding: 24px 20px 20px; }
+      .footer-top { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-contacts { flex-wrap: wrap; justify-content: center; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .footer-nav { flex-wrap: wrap; justify-content: center; }
     }
 
     .scroll-top {
@@ -936,7 +944,7 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-left">
+    <div class="footer-top">
       <a href="index.html" class="footer-logo">
         <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
           <defs><clipPath id="sq-ft"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath></defs>
@@ -948,25 +956,28 @@
         </svg>
         QUATRO - PACK, spol. s r.o.
       </a>
-      <span class="footer-divider"></span>
-      <a href="https://maps.google.com/?q=%C5%A0amor%C3%ADnska+4152,+903+01+Senec">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Šamorínska 4152, 903 01 Senec
-      </a>
-      <a href="tel:+421905833912">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        +421 905 833 912
-      </a>
-      <a href="mailto:objednavky@quatro-pack.com">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        objednavky@quatro-pack.com
-      </a>
+      <div class="footer-contacts">
+        <a href="https://maps.google.com/?q=%C5%A0amor%C3%ADnska+4152,+903+01+Senec">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Šamorínska 4152, 903 01 Senec
+        </a>
+        <a href="tel:+421905833912">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +421 905 833 912
+        </a>
+        <a href="mailto:objednavky@quatro-pack.com">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          objednavky@quatro-pack.com
+        </a>
+      </div>
     </div>
-    <div class="footer-right">
-      <a href="index.html">Úvod</a>
-      <a href="baliace-materialy.html">Baliace materiály</a>
-      <a href="baliace-systemy.html">Baliace systémy</a>
-      <span>© 2026 QUATRO - PACK, spol. s r.o.</span>
+    <div class="footer-bottom">
+      <div class="footer-nav">
+        <a href="index.html">Úvod</a>
+        <a href="baliace-materialy.html">Baliace materiály</a>
+        <a href="baliace-systemy.html">Baliace systémy</a>
+      </div>
+      <span class="footer-copy">© 2026 QUATRO - PACK, spol. s r.o.</span>
     </div>
   </footer>
 
