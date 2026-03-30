@@ -60,7 +60,7 @@
       display: flex; align-items: center; gap: 10px;
       text-decoration: none; color: var(--text-primary);
     }
-    .navbar-logo svg { width: 40px; height: 40px; }
+    .navbar-logo img { width: 40px; height: 40px; }
     .navbar-logo span {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 22px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
@@ -373,7 +373,7 @@
       color: rgba(255,255,255,0.6); text-decoration: none;
       font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 15px;
     }
-    .footer-logo svg { width: 28px; height: 28px; opacity: 0.6; }
+    .footer-logo img { width: 24px; height: 24px; opacity: 0.6; }
     .footer-contacts { display: flex; align-items: center; gap: 24px; }
     .footer-contacts a {
       color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px;
@@ -481,7 +481,7 @@
     @media (max-width: 768px) {
       .navbar-links { display: none; }
       .navbar-cta, .navbar-right .lang-switch { display: none; }
-      .navbar-logo svg { width: 32px; height: 32px; }
+      .navbar-logo img { width: 32px; height: 32px; }
       .navbar-logo span { font-size: 16px; letter-spacing: 1px; }
       .hamburger { display: flex; z-index: 1101; }
       .hamburger.active span { background: #fff; }
@@ -602,17 +602,7 @@
 
   <nav class="navbar">
     <a href="index.html" class="navbar-logo">
-      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-        <defs>
-          <clipPath id="sq-nav"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath>
-          <linearGradient id="bg-nav" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#353647"/><stop offset="100%" stop-color="#23242F"/></linearGradient>
-        </defs>
-        <g clip-path="url(#sq-nav)"><rect width="120" height="120" fill="url(#bg-nav)"/></g>
-        <rect x="28" y="28" width="27" height="27" rx="6" fill="#ffffff"/>
-        <rect x="65" y="28" width="27" height="27" rx="6" fill="rgba(255,255,255,0.55)"/>
-        <rect x="28" y="65" width="27" height="27" rx="6" fill="rgba(255,255,255,0.55)"/>
-        <rect x="65" y="65" width="27" height="27" rx="6" fill="#D4FF00"/>
-      </svg>
+      <img src="qp_logo.svg" alt="Quatro Pack" class="logo-icon">
       <span>QUATRO - PACK</span>
     </a>
     <ul class="navbar-links">
@@ -887,14 +877,7 @@
   <footer class="footer">
     <div class="footer-top">
       <a href="index.html" class="footer-logo">
-        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-          <defs><clipPath id="sq-ft"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath></defs>
-          <g clip-path="url(#sq-ft)"><rect width="120" height="120" fill="rgba(255,255,255,0.15)"/></g>
-          <rect x="28" y="28" width="27" height="27" rx="6" fill="rgba(255,255,255,0.6)"/>
-          <rect x="65" y="28" width="27" height="27" rx="6" fill="rgba(255,255,255,0.3)"/>
-          <rect x="28" y="65" width="27" height="27" rx="6" fill="rgba(255,255,255,0.3)"/>
-          <rect x="65" y="65" width="27" height="27" rx="6" fill="#D4FF00" opacity="0.6"/>
-        </svg>
+        <img src="qp_logo.svg" alt="Quatro Pack" class="logo-icon">
         QUATRO - PACK, spol. s r.o.
       </a>
       <div class="footer-contacts">
