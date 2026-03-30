@@ -1,11 +1,15 @@
-<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <clipPath id="sq"><path d="M60 0C26.9 0 16.1 0 8.05 8.05S0 26.9 0 60s0 43.9 8.05 51.95S26.9 120 60 120s43.9 0 51.95-8.05S120 93.1 120 60s0-43.9-8.05-51.95S93.1 0 60 0z"/></clipPath>
-    <linearGradient id="bg" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#353647"/><stop offset="100%" stop-color="#23242F"/></linearGradient>
-  </defs>
-  <g clip-path="url(#sq)"><rect width="120" height="120" fill="url(#bg)"/></g>
-  <rect x="28" y="28" width="27" height="27" rx="6" fill="#ffffff"/>
-  <rect x="65" y="28" width="27" height="27" rx="6" fill="rgba(255,255,255,0.55)"/>
-  <rect x="28" y="65" width="27" height="27" rx="6" fill="rgba(255,255,255,0.55)"/>
-  <rect x="65" y="65" width="27" height="27" rx="6" fill="#D4FF00"/>
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <title>quatro pack</title>
+
+  <rect x="1" y="1" width="98" height="98" fill="#FFFFFF" stroke="#2D2E3A" stroke-width="3" rx="6" ry="6"/>
+
+  <g transform="translate(9.000,60.594) scale(0.06560,-0.06560)">
+    <path d="M352 -11Q352 30 358 70H352Q335 37 303.5 13.5Q272 -10 220 -10Q139 -10 88.5 63.0Q38 136 38 276Q38 416 89.5 489.5Q141 563 223 563Q276 563 309.0 540.5Q342 518 361 485H365L378 553H554V-240H352ZM306 138Q342 138 355.5 167.5Q369 197 369 256V279Q369 344 356.5 379.5Q344 415 303 415Q243 415 243 273Q243 201 258.5 169.5Q274 138 306 138Z" fill="#2D2E3A"/>
+  </g>
+
+  <g transform="translate(50.984,60.594) scale(0.06560,-0.06560)">
+    <path d="M392 563Q478 563 524.5 489.5Q571 416 571 278Q571 184 546.5 119.5Q522 55 480.0 22.5Q438 -10 385 -10Q330 -10 301.5 11.0Q273 32 258 54H253Q255 35 256.5 13.0Q258 -9 258 -38V-240H56V553H220L248 483H258Q276 515 307.0 539.0Q338 563 392 563ZM311 413Q280 413 269.0 383.0Q258 353 258 294V279Q258 213 269.0 178.5Q280 144 312 144Q338 144 352.0 175.5Q366 207 366 280Q366 353 351.5 383.0Q337 413 311 413Z" fill="#2D2E3A"/>
+  </g>
+
 </svg>
